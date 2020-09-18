@@ -5,20 +5,20 @@
     <v-dialog v-model="show" max-width="600px">
       <v-card>
         <v-card-title>
-          <span class="headline">SIGN UP</span>
+          <span class="headline">新規登録</span>
         </v-card-title>
         <v-card-text>
           <v-container>
-            <v-text-field label="NAME" v-model="name" required></v-text-field>
-            <v-text-field label="EMAIL" v-model="email" required></v-text-field>
-            <v-text-field label="PASSWORD" v-model="password" type="password" required></v-text-field>
-            <v-text-field label="PASSWORD CONFIRMATION" v-model="password_confirmation" type="password" required></v-text-field>
+            <v-text-field label="名前" v-model="name" required></v-text-field>
+            <v-text-field label="メールアドレス" v-model="email" required></v-text-field>
+            <v-text-field label="パスワード" v-model="password" type="password" required></v-text-field>
+            <v-text-field label="パスワード確認" v-model="password_confirmation" type="password" required></v-text-field>
           </v-container>
         </v-card-text>
         <v-card-actions>
+          <v-btn color="blue darken-1" dark @click="show=false">閉じる</v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="show=false">Close</v-btn>
-          <v-btn color="blue darken-1" text @click="signUp">Sign Up</v-btn>
+          <v-btn color="blue darken-1" dark @click="signUp">新規登録</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -54,8 +54,9 @@ export default {
           localStorage.setItem('client', response.headers['client'])
           localStorage.setItem('uid', response.headers['uid'])
           localStorage.setItem('token-type', response.headers['token-type'])
-          this.$router.push('MyPage')
-        }
+          this.$router.push('RegisterProfile')
+          this.show = false
+    },
       )
     }
   }

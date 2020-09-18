@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Welcome from '../views/Welcome.vue'
 import MyPage from '../views/MyPage.vue'
+import RegisterProfile from '../views/RegisterProfile.vue'
 
 Vue.use(VueRouter)
 
@@ -23,6 +24,11 @@ const routes = [
     path: '/mypage',
     name: 'MyPage',
     component: MyPage
+  },
+  {
+    path: '/registerprofile',
+    name: 'RegisterProfile',
+    component: RegisterProfile
   }
 ]
 
