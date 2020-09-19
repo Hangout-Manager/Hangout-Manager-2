@@ -3,21 +3,18 @@
     "name": "MyPage",
     "path": "/MyPage",
     "component": "/app/nuxt-project/pages/MyPage.vue",
-    "chunkName": "pages/MyPage",
-    "_name": "_42d71b37"
+    "chunkName": "pages/MyPage"
   },
   {
     "name": "RegisterProfile",
     "path": "/RegisterProfile",
     "component": "/app/nuxt-project/pages/RegisterProfile.vue",
-    "chunkName": "pages/RegisterProfile",
-    "_name": "_7ed23c4c"
+    "chunkName": "pages/RegisterProfile"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/app/nuxt-project/pages/index.vue",
-    "chunkName": "pages/index",
-    "_name": "_dc6fcb74"
+    "chunkName": "pages/index"
   }
 ]

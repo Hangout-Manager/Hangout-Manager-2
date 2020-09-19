@@ -30,6 +30,8 @@ services:
       - ./view:/app
     tty: true
     command: npm run dev
+    environment:
+      - VUE_APP_URL=http://localhost:3000
     depends_on:
       - api
 

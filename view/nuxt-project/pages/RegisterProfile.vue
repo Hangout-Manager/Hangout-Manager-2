@@ -142,7 +142,7 @@ export default {
     }
   },
   created() {
-    const show_url = process.env.VUE_APP_URL + '/api/v1/users/show'
+    const show_url = 'http://localhost:3000/api/v1/users/show'
     axios.get(show_url, {
       headers: { 
         "Content-Type": "application/json", 
@@ -158,7 +158,7 @@ export default {
   },
   methods: {
     register: function() {
-      const register_url = process.env.VUE_APP_URL + '/user_profiles'
+      const register_url = 'http://localhost:3000/user_profiles'
       axios.defaults.headers.common['Content-Type'] = 'application/json';
       var params = new URLSearchParams();
       params.append('age', this.age);

@@ -104,7 +104,7 @@ export default {
   },
   methods: {
     signOut: function() {
-      const url = process.env.VUE_APP_URL + '/api/auth/sign_out'
+      const url = 'http://localhost:3000/api/auth/sign_out'
       axios.delete(url, {
         headers: { 
           "Content-Type": "application/json", 
@@ -121,7 +121,7 @@ export default {
     }
   },
   created() {
-    const user_url = process.env.VUE_APP_URL + '/api/v1/users/show'
+    const user_url = 'http://localhost:3000/api/v1/users/show'
     axios.get(user_url, {
       headers: { 
         "Content-Type": "application/json", 
@@ -133,7 +133,7 @@ export default {
       .then(response => {
         this.user = response.data.data
       })
-    const profile_url = process.env.VUE_APP_URL + '/api/v1/users/profile'
+    const profile_url = 'http://localhost:3000/api/v1/users/profile'
     axios.get(profile_url, {
       headers: { 
         "Content-Type": "application/json", 
