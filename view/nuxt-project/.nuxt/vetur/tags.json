@@ -1,0 +1,14 @@
+{
+  "Signin": {
+    "description": "Auto imported from components/signin.vue"
+  },
+  "LazySignin": {
+    "description": "Auto imported from components/signin.vue"
+  },
+  "Signup": {
+    "description": "Auto imported from components/signup.vue"
+  },
+  "LazySignup": {
+    "description": "Auto imported from components/signup.vue"
+  }
+}

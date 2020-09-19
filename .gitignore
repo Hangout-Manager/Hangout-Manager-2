@@ -1,13 +1,13 @@
-/front/node_modules
+/view/nuxt-project/node_modules
 /api/log
 /api/tmp
 .DS_Store
 /front/dist
 
 # Log files
-/front/npm-debug.log*
-/front/yarn-debug.log*
-/front/yarn-error.log*
+/viwe/nuxt-project/npm-debug.log*
+/view/nuxt-project/yarn-debug.log*
+/view/nuxt-project/yarn-error.log*
 
 # Editor directories and files
 .idea

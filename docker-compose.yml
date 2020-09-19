@@ -21,18 +21,20 @@ services:
       - db
     stdin_open: true
     tty: true
-    
-  front:
-    build: ./front
-    command: npm run serve
+
+  view:
+    build: ./view
     ports:
-      - "8080:8080"
+      - 8000:8000
     volumes:
-      - ./front:/app
-    stdin_open: true
+      - ./view:/app
     tty: true
+    command: npm run dev
     environment:
       - VUE_APP_URL=http://localhost:3000
+    depends_on:
+      - api
+
 
 volumes:
   mysql-data:

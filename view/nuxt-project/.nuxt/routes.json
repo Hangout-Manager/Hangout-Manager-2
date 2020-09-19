@@ -1,0 +1,20 @@
+[
+  {
+    "name": "MyPage",
+    "path": "/MyPage",
+    "component": "/app/nuxt-project/pages/MyPage.vue",
+    "chunkName": "pages/MyPage"
+  },
+  {
+    "name": "RegisterProfile",
+    "path": "/RegisterProfile",
+    "component": "/app/nuxt-project/pages/RegisterProfile.vue",
+    "chunkName": "pages/RegisterProfile"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/app/nuxt-project/pages/index.vue",
+    "chunkName": "pages/index"
+  }
+]
