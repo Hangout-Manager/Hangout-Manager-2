@@ -5,7 +5,7 @@
         <v-col cols="12">
         <v-card
           height="600"
-          color="#B0BEC5"
+          color="#E0E0E0"
           raised
           >
           <v-row justify="center" align-content="center">

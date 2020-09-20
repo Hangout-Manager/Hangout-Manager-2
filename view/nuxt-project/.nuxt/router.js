@@ -3,8 +3,15 @@ import Router from 'vue-router'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _42d71b37 = () => interopDefault(import('../pages/MyPage.vue' /* webpackChunkName: "pages/MyPage" */))
+const _af18ebda = () => interopDefault(import('../pages/EditProfile.vue' /* webpackChunkName: "pages/EditProfile" */))
+const _3f1a1c7a = () => interopDefault(import('../pages/MyPage/index.vue' /* webpackChunkName: "pages/MyPage/index" */))
 const _7ed23c4c = () => interopDefault(import('../pages/RegisterProfile.vue' /* webpackChunkName: "pages/RegisterProfile" */))
+const _4ea4145c = () => interopDefault(import('../pages/Users.vue' /* webpackChunkName: "pages/Users" */))
+const _1540e2e0 = () => interopDefault(import('../pages/MyPage/Followers/index.vue' /* webpackChunkName: "pages/MyPage/Followers/index" */))
+const _1023fcad = () => interopDefault(import('../pages/MyPage/Followings/index.vue' /* webpackChunkName: "pages/MyPage/Followings/index" */))
+const _2144e09c = () => interopDefault(import('../pages/user/_id.vue' /* webpackChunkName: "pages/user/_id" */))
+const _d1786e9e = () => interopDefault(import('../pages/user/_user_id/Followers/index.vue' /* webpackChunkName: "pages/user/_user_id/Followers/index" */))
+const _63045e08 = () => interopDefault(import('../pages/user/_user_id/Followings/index.vue' /* webpackChunkName: "pages/user/_user_id/Followings/index" */))
 const _dc6fcb74 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 // TODO: remove in Nuxt 3
@@ -24,13 +31,41 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
+    path: "/EditProfile",
+    component: _af18ebda,
+    name: "EditProfile"
+  }, {
     path: "/MyPage",
-    component: _42d71b37,
+    component: _3f1a1c7a,
     name: "MyPage"
   }, {
     path: "/RegisterProfile",
     component: _7ed23c4c,
     name: "RegisterProfile"
+  }, {
+    path: "/Users",
+    component: _4ea4145c,
+    name: "Users"
+  }, {
+    path: "/MyPage/Followers",
+    component: _1540e2e0,
+    name: "MyPage-Followers"
+  }, {
+    path: "/MyPage/Followings",
+    component: _1023fcad,
+    name: "MyPage-Followings"
+  }, {
+    path: "/user/:id?",
+    component: _2144e09c,
+    name: "user-id"
+  }, {
+    path: "/user/:user_id?/Followers",
+    component: _d1786e9e,
+    name: "user-user_id-Followers"
+  }, {
+    path: "/user/:user_id?/Followings",
+    component: _63045e08,
+    name: "user-user_id-Followings"
   }, {
     path: "/",
     component: _dc6fcb74,
