@@ -159,14 +159,14 @@ export default {
   },
   methods: {
     register: function() {
-      const register_url = 'http://localhost:3000/user_profiles'
+      const register_url = 'http://localhost:3000/user_profiles/' + this.user.id
       axios.defaults.headers.common['Content-Type'] = 'application/json';
       var params = new URLSearchParams();
       params.append('age', this.age);
       params.append('sex_id', this.sex);
       params.append('place_id', this.place);
       params.append('user_id', this.user.id);
-      axios.post(register_url, params).then(
+      axios.put(register_url, params).then(
         () => {
           this.$router.push('MyPage')
         },

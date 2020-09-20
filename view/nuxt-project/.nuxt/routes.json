@@ -1,20 +1,72 @@
 [
   {
+    "name": "EditProfile",
+    "path": "/EditProfile",
+    "component": "/app/nuxt-project/pages/EditProfile.vue",
+    "chunkName": "pages/EditProfile",
+    "_name": "_af18ebda"
+  },
+  {
     "name": "MyPage",
     "path": "/MyPage",
-    "component": "/app/nuxt-project/pages/MyPage.vue",
-    "chunkName": "pages/MyPage"
+    "component": "/app/nuxt-project/pages/MyPage/index.vue",
+    "chunkName": "pages/MyPage/index",
+    "_name": "_3f1a1c7a"
   },
   {
     "name": "RegisterProfile",
     "path": "/RegisterProfile",
     "component": "/app/nuxt-project/pages/RegisterProfile.vue",
-    "chunkName": "pages/RegisterProfile"
+    "chunkName": "pages/RegisterProfile",
+    "_name": "_7ed23c4c"
+  },
+  {
+    "name": "Users",
+    "path": "/Users",
+    "component": "/app/nuxt-project/pages/Users.vue",
+    "chunkName": "pages/Users",
+    "_name": "_4ea4145c"
+  },
+  {
+    "name": "MyPage-Followers",
+    "path": "/MyPage/Followers",
+    "component": "/app/nuxt-project/pages/MyPage/Followers/index.vue",
+    "chunkName": "pages/MyPage/Followers/index",
+    "_name": "_1540e2e0"
+  },
+  {
+    "name": "MyPage-Followings",
+    "path": "/MyPage/Followings",
+    "component": "/app/nuxt-project/pages/MyPage/Followings/index.vue",
+    "chunkName": "pages/MyPage/Followings/index",
+    "_name": "_1023fcad"
+  },
+  {
+    "name": "user-id",
+    "path": "/user/:id?",
+    "component": "/app/nuxt-project/pages/user/_id.vue",
+    "chunkName": "pages/user/_id",
+    "_name": "_2144e09c"
+  },
+  {
+    "name": "user-user_id-Followers",
+    "path": "/user/:user_id?/Followers",
+    "component": "/app/nuxt-project/pages/user/_user_id/Followers/index.vue",
+    "chunkName": "pages/user/_user_id/Followers/index",
+    "_name": "_d1786e9e"
+  },
+  {
+    "name": "user-user_id-Followings",
+    "path": "/user/:user_id?/Followings",
+    "component": "/app/nuxt-project/pages/user/_user_id/Followings/index.vue",
+    "chunkName": "pages/user/_user_id/Followings/index",
+    "_name": "_63045e08"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/app/nuxt-project/pages/index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_dc6fcb74"
   }
 ]
