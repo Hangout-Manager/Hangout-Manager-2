@@ -30,6 +30,19 @@
               </v-card>
             </v-col>
           </v-row>
+          <v-row>
+            <v-col cols="6"></v-col>
+            <v-col cols="4">
+              <v-row>
+                <v-col>
+                  <v-btn color="#AD1457" dark block text @click="onClickSignUp">新規登録はこちらから</v-btn>
+                  <signup ref="signup"/> 
+                  <v-btn color="#1976D2" dark block text @click="onClickSignIn">こちらからもログインできます</v-btn>
+                  <signin ref="signin"/> 
+                </v-col>
+              </v-row>
+            </v-col>
+          </v-row>
         </v-card>
         </v-col>
       </v-row>
@@ -38,6 +51,8 @@
 </template>
 
 <script>
+import Signup from '../components/signup.vue'
+import Signin from '../components/signin.vue'
 import axios from 'axios'
 export default {
   name: "Welcome",
@@ -47,8 +62,19 @@ export default {
       password: '',
     }
   },
+  components: {
+    Signup,
+    Signin
+  },
   methods: {
     open () {
+    },
+    onClickSignUp() {
+      console.log('onClickSignUp')
+      this.$refs.signup.open();
+    },
+    onClickSignIn() {
+      this.$refs.signin.open();
     },
     signIn: function() {
       const url = 'http://localhost:3000/api/auth/sign_in'
