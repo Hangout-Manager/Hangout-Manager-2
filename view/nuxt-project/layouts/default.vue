@@ -9,7 +9,7 @@
       >
       <v-row>
         <v-col cols="1"></v-col>
-        <v-col cols="2">
+        <v-col cols="4">
           <router-link to="/">
             <v-img
               src="images/logo_hangout.png"
@@ -19,28 +19,49 @@
             </v-img>
           </router-link>
         </v-col>
-        <v-col cols="4"></v-col>
-        <v-col cols="4">
+        <v-col cols="5"></v-col>
+        <v-col cols="2">
           <v-row>
-            <v-col cols="2">
-              <v-btn color="#FF6D00" dark x-large block text to="/RegisterProfile">Profile</v-btn>
-            </v-col>
-            <v-col cols="2">
-              <v-btn color="#FF6D00" dark x-large block text to="/MyPage">MyPage</v-btn>
-            </v-col>
-            <v-col cols="2">
-              <v-btn color="#FF6D00" dark x-large block text to="/Users">Users</v-btn>
-            </v-col>
-            <v-col cols="2">
-              <v-btn color="#AD1457" dark x-large block text @click="onClickSignUp">Sign UP</v-btn>
-              <signup ref="signup"/> 
-            </v-col>
-            <v-col cols="2">
-              <v-btn color="#1976D2" dark x-large block text @click="onClickSignIn">Sign In</v-btn>
-              <signin ref="signin"/> 
-            </v-col>
-            <v-col cols="2">
-              <v-btn color="#78909C" dark x-large block text @click="signOut">Sign Out</v-btn>
+            <v-col>
+              <div class="text-center">
+                <v-menu offset-y>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-icon
+                      color="primary"
+                      dark
+                      text
+                      size="50"
+                      v-bind="attrs"
+                      v-on="on"
+                      >mdi-menu</v-icon>
+                  </template>
+                  <v-list shaped width="500">
+                    <v-subheader>Menu</v-subheader>
+                    <v-list-item-group v-model="item" color="primary">
+                    <v-list-item
+                      v-for="(item, index) in items"
+                      :key="index"
+                      :to="item.click"
+                      >
+                      <v-list-item-icon>
+                        <v-icon v-text="item.icon"></v-icon>
+                      </v-list-item-icon>
+                      <v-list-item-content>
+                        <v-list-item-title v-text="item.title"></v-list-item-title>
+                      </v-list-item-content>
+                    </v-list-item>
+                    <v-list-item @click="signOut">
+                      <v-list-item-icon>
+                        <v-icon>mdi-clock</v-icon>
+                      </v-list-item-icon>
+                      <v-list-item-content>
+                        <v-list-item-title>ログアウト</v-list-item-title>
+                      </v-list-item-content>
+                    </v-list-item>
+                    </v-list-item-group>
+                  </v-list>
+                </v-menu>
+              </div>
             </v-col>
           </v-row>
           <v-col cols="1"></v-col>
@@ -60,6 +81,15 @@ import axios from 'axios'
 
 export default {
   name: 'App',
+  data (){
+    return {
+      items: [
+        { title: 'マイページ', click: '/MyPage', icon: 'mdi-account' },
+        { title: 'ユーザー一覧', click: '/Users', icon: 'mdi-account-multiple' },
+        { title: '新規プロフィール登録', click: '/RegisterProfile', icon: 'mdi-flag' },
+      ]
+    }
+  },
   components: {
     Signup,
     Signin
