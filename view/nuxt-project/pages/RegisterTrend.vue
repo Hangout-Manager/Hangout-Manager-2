@@ -14,8 +14,7 @@
             color="grey lighten-1"
             height="200px"
             >
-            {{ i }}
-            {{ hangouts[i-1].name }}
+            {{ hangouts[i-1].name }}でよくあそぶ
           </v-card>
 
           <v-btn
@@ -38,8 +37,6 @@
       {{ hangouts[yes_list[0]] }}
       {{ hangouts[yes_list[1]] }}
       {{ hangouts[yes_list[2]] }}
-      {{ hangouts[yes_list[3]] }}
-      {{ hangouts[yes_list[4]] }}
     </p>
     <v-row justify="center">
       <v-dialog
@@ -54,8 +51,6 @@
             {{ hangouts[yes_list[0]] }}
             {{ hangouts[yes_list[1]] }}
             {{ hangouts[yes_list[2]] }}
-            {{ hangouts[yes_list[3]] }}
-            {{ hangouts[yes_list[4]] }}
           </v-card-text>
 
           <v-card-actions>
@@ -114,8 +109,8 @@ export default {
     },
     pushYes (n) {
       this.count += 1
-      this.yes_list += n
-      if (this.count == 5){
+      this.yes_list += (n-1)
+      if (this.count == 3){
         this.dialog = true
       }
     }

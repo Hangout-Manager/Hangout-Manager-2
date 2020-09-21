@@ -96,3 +96,5 @@ typings/
 .eslintcache
 
 # Optional REPL history
+
+/recommend/__pycache__
