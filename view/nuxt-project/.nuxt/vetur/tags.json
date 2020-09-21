@@ -1,4 +1,16 @@
 {
+  "Post": {
+    "description": "Auto imported from components/Post.vue"
+  },
+  "LazyPost": {
+    "description": "Auto imported from components/Post.vue"
+  },
+  "ToRegist": {
+    "description": "Auto imported from components/ToRegist.vue"
+  },
+  "LazyToRegist": {
+    "description": "Auto imported from components/ToRegist.vue"
+  },
   "Signin": {
     "description": "Auto imported from components/signin.vue"
   },

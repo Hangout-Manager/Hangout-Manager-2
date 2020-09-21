@@ -70,7 +70,6 @@ export default {
     open () {
     },
     onClickSignUp() {
-      console.log('onClickSignUp')
       this.$refs.signup.open();
     },
     onClickSignIn() {
