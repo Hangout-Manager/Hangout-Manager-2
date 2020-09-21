@@ -1,6 +1,7 @@
-version: '3'
+version: '3.7'
 services:
   db:
+    container_name: "hangout-db"
     image: mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: password
@@ -9,9 +10,12 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     volumes:
       - mysql-data:/var/lib/mysql
+    networks:
+      - proxy
 
   api:
     build: ./api
+    container_name: "hangout-api"
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - ./api:/myapp
@@ -21,8 +25,11 @@ services:
       - db
     stdin_open: true
     tty: true
+    networks:
+      - proxy
 
   view:
+    container_name: "hangout-view"
     build: ./view
     ports:
       - 8000:8000
@@ -35,7 +42,23 @@ services:
     depends_on:
       - api
 
+  recommend:
+    container_name: "hangout-recommend"
+    build: ./recommend
+    command: flask run --host 0.0.0.0 --port 5000
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./recommend:/recommend
+    stdin_open: true
+    tty: true
+    networks:
+      - proxy
 
 volumes:
   mysql-data:
     driver: local
+
+networks:
+  proxy:
+    external: true
