@@ -8,6 +8,9 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
   has_one :user_profile, dependent: :destroy
 
+  # post
+  has_many :posts
+
   # follow
   has_many :relationships
   has_many :followings, through: :relationships, source: :follow

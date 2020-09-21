@@ -69,6 +69,11 @@ class Api::V1::UsersController < ApplicationController
     render json: { data: @is_login }
   end
 
+  def current_get_post
+    @current_posts = current_api_user.posts
+    render json: { data: @current_posts }
+  end
+
  private
     def user_params
       params.permit(:user_id)

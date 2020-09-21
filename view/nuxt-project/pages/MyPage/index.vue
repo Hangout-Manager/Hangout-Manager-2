@@ -9,7 +9,9 @@
               <v-col cols="1"></v-col>
               <v-col cols="10">
                 <h1 style="text-align:left">ようこそ{{ user.name }}さん</h1>
+                  <post ref="post"/> 
                 <hr>
+                  <v-btn color="#AD1457" dark block text @click="onClickPost">あそびを投稿する</v-btn>
               </v-col>
               <v-col cols="1"></v-col>
             </v-row>
@@ -50,14 +52,22 @@
                   <v-simple-table>
                     <thead>
                       <tr>
-                        <th class="text-left">Name</th>
-                        <th class="text-left">Calories</th>
+                        <th class="text-left">ラベル</th>
+                        <th class="text-left">タイトル</th>
+                        <th class="text-left">内容</th>
+                        <th class="text-left">タグ</th>
+                        <th class="text-left">募集上限人数</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td class="text-left">テスト</td>
-                        <td class="text-left">テスト</td>
+                      <tr v-for="(post, i) in posts" :key="i">
+                        <v-chip v-if="post.label_id==1" class="ma-2" dark color="primary">募集中</v-chip>
+                        <v-chip v-if="post.label_id==2" class="ma-2" dark color="green">募集締め切り</v-chip>
+                        <v-chip v-if="post.label_id==3" class="ma-2" dark color="red">終了</v-chip>
+                        <td class="text-left">{{ post.title }}</td>
+                        <td class="text-left">{{ post.content }}</td>
+                        <td class="text-left">{{ post.tag }}</td>
+                        <td class="text-left">{{ post.upper_number }}</td>
                       </tr>
                     </tbody>
                   </v-simple-table>
@@ -125,6 +135,7 @@
 </template>
 
 <script>
+import Post from '../../components/Post.vue'
 import axios from 'axios'
 export default {
   data () {
@@ -133,9 +144,18 @@ export default {
       profile: [],
       followings: [],
       followers: [],
+      posts: [],
     }
   },
+  components: {
+    Post
+  },
   methods: {
+    open () {
+    },
+    onClickPost() {
+      this.$refs.post.open();
+    },
     signOut: function() {
       const url = 'http://localhost:3000/api/auth/sign_out'
       axios.delete(url, {
@@ -201,6 +221,18 @@ export default {
     })
       .then(response => {
         this.followers = response.data.data
+      })
+    const posts_url = 'http://localhost:3000/api/v1/current_get_posts'
+    axios.get(posts_url, {
+      headers: { 
+        "Content-Type": "application/json", 
+        "access-token": localStorage.getItem('access-token'),
+        "client": localStorage.getItem('client'),
+        "uid": localStorage.getItem('uid')
+      }
+    })
+      .then(response => {
+        this.posts = response.data.data
       })
   }
 }

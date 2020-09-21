@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :hangouts
+  resources :posts
   resources :user_profiles
   resources :relationships, only: [:create, :destroy]
   post "follow" => "relationships#create"
@@ -18,6 +20,7 @@ Rails.application.routes.draw do
       get "current_get_followers" => "users#current_get_followers"
       get "get_followers/:id" => "users#get_followers"
       get "is_login" => "users#is_login"
+      get "current_get_posts" => "users#current_get_post"
     end
   end
 

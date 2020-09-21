@@ -1,0 +1,10 @@
+Hangout.seed( :id,
+  { id: 1, name: 'test1', agon:1, alea:2, mimicry:3, ilinx:4 },
+  { id: 2, name: 'test2', agon:2, alea:3, mimicry:4, ilinx:1 },
+  { id: 3, name: 'test3', agon:3, alea:4, mimicry:1, ilinx:2 },
+  { id: 4, name: 'test4', agon:4, alea:1, mimicry:2, ilinx:3 },
+  { id: 5, name: 'test5', agon:4, alea:3, mimicry:2, ilinx:1 },
+  { id: 6, name: 'test6', agon:3, alea:2, mimicry:1, ilinx:4 },
+  { id: 7, name: 'test7', agon:2, alea:1, mimicry:4, ilinx:3 },
+  { id: 8, name: 'test8', agon:1, alea:4, mimicry:3, ilinx:2 },
+)
