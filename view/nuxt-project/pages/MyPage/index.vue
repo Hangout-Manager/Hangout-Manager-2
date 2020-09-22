@@ -11,7 +11,7 @@
                 <h1 style="text-align:left">ようこそ{{ user.name }}さん</h1>
                   <post ref="post"/> 
                 <hr>
-                  <v-btn color="#AD1457" dark block text @click="onClickPost">あそびを投稿する</v-btn>
+                  <v-btn color="#AD1457" dark block @click="onClickPost">あそびを投稿する</v-btn>
               </v-col>
               <v-col cols="1"></v-col>
             </v-row>
@@ -48,45 +48,28 @@
               <v-col cols="7">
                 <v-card>
                   <v-card-title class="subheading font-weight-bold">{{ user.name }}が予定しているあそび</v-card-title>
-                  <v-divider></v-divider>
-                  <v-simple-table>
-                    <thead>
-                      <tr>
-                        <th class="text-left">ラベル</th>
-                        <th class="text-left">タイトル</th>
-                        <th class="text-left">内容</th>
-                        <th class="text-left">タグ</th>
-                        <th class="text-left">募集上限人数</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr v-for="(post, i) in posts" :key="i">
+                  <v-row justify="center" align-content="center">
+                    <v-col cols="5" v-for="post in posts">
+                    <v-hover v-slot:default="{ hover }">
+                      <v-card
+                        :elevation="hover ? 12 : 2"
+                        :class="{ 'on-hover': hover }"
+                        >
                         <v-chip v-if="post.label_id==1" class="ma-2" dark color="primary">募集中</v-chip>
                         <v-chip v-if="post.label_id==2" class="ma-2" dark color="green">募集締め切り</v-chip>
                         <v-chip v-if="post.label_id==3" class="ma-2" dark color="red">終了</v-chip>
-                        <td class="text-left">{{ post.title }}</td>
-                        <td class="text-left">{{ post.content }}</td>
-                        <td class="text-left">{{ post.tag }}</td>
-                        <td class="text-left">{{ post.upper_number }}</td>
-                      </tr>
-                    </tbody>
-                  </v-simple-table>
-                  <v-card-title class="subheading font-weight-bold">{{ user.name }}が予定しているあそび</v-card-title>
-                  <v-divider></v-divider>
-                  <v-simple-table>
-                    <thead>
-                      <tr>
-                        <th class="text-left">Name</th>
-                        <th class="text-left">Calories</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td class="text-left">テスト</td>
-                        <td class="text-left">テスト</td>
-                      </tr>
-                    </tbody>
-                  </v-simple-table>
+                        <v-card-title>{{ post.title }}</v-card-title>
+                        <v-card-text>{{ post.content }}</v-card-text>
+                        <v-chip
+                          class="ma-2"
+                          label
+                          >
+                          {{ post.tag }}
+                        </v-chip>
+                      </v-card>
+                    </v-hover>
+                    </v-col>
+                  </v-row>
                 </v-card>
               </v-col>
             </v-row>
