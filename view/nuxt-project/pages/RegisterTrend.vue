@@ -11,7 +11,7 @@
               :key="i"
               :step="i"
               >
-              <h1>あなたの普段のことを教えてください</h1>
+              <h1>{{ user.name }}さんの普段のことを教えてください</h1>
               <v-row>
                 <v-col cols="3"></v-col>
                 <v-col cols="6">
@@ -70,16 +70,16 @@
                 ・{{ name }}
               </v-card-text>
             <v-card-text>
-                ・{{ target_hangouts_agon }}
+                ・アゴン:{{ target_hangouts_agon }}
               </v-card-text>
               <v-card-text>
-                ・{{ target_hangouts_alea }}
+                ・アレア:{{ target_hangouts_alea }}
               </v-card-text>
               <v-card-text>
-                ・{{ target_hangouts_mimicry }}
+                ・ミミクリ:{{ target_hangouts_mimicry }}
               </v-card-text>
               <v-card-text>
-                ・{{ target_hangouts_ilinx }}
+                ・イリンクス:{{ target_hangouts_ilinx }}
               </v-card-text>
 
               <v-card-actions>
@@ -94,7 +94,7 @@
                 <v-btn
                   color="green darken-1"
                   text
-                  to="/MyPage"
+                  @click="postLongTerm"
                   >
                   はい
                 </v-btn>
@@ -119,7 +119,8 @@ export default {
       yes_list: [],
       dialog: false,
       hangouts: [{}],
-      target_hangouts: []
+      target_hangouts: [],
+      user: []
     }
   },
   watch: {
@@ -130,9 +131,6 @@ export default {
     },
   },
   methods: {
-    test(val) {
-      console.log(Object.keys(val))
-    },
     nextStep (n) {
       if (n === this.hangouts.length) {
         this.e1 = 1
@@ -145,17 +143,34 @@ export default {
       this.yes_list += (n-1)
       if (this.count == 3){
         this.target_hangouts_name = [this.hangouts[this.yes_list[0]].name, this.hangouts[this.yes_list[1]].name, this.hangouts[this.yes_list[2]].name]
-        this.target_hangouts_agon = [this.hangouts[this.yes_list[0]].agon, this.hangouts[this.yes_list[1]].agon, this.hangouts[this.yes_list[2]].agon]
-        this.target_hangouts_alea = [this.hangouts[this.yes_list[0]].alea, this.hangouts[this.yes_list[1]].alea, this.hangouts[this.yes_list[2]].alea]
-        this.target_hangouts_mimicry = [this.hangouts[this.yes_list[0]].mimicry, this.hangouts[this.yes_list[1]].mimicry, this.hangouts[this.yes_list[2]].mimicry]
-        this.target_hangouts_ilinx = [this.hangouts[this.yes_list[0]].ilinx, this.hangouts[this.yes_list[1]].ilinx, this.hangouts[this.yes_list[2]].ilinx]
+        this.target_hangouts_agon = (this.hangouts[this.yes_list[0]].agon + this.hangouts[this.yes_list[1]].agon + this.hangouts[this.yes_list[2]].agon) / this.count
+        this.target_hangouts_alea = (this.hangouts[this.yes_list[0]].alea + this.hangouts[this.yes_list[1]].alea + this.hangouts[this.yes_list[2]].alea) / this.count
+        this.target_hangouts_mimicry = (this.hangouts[this.yes_list[0]].mimicry + this.hangouts[this.yes_list[1]].mimicry + this.hangouts[this.yes_list[2]].mimicry) / this.count
+        this.target_hangouts_ilinx = (this.hangouts[this.yes_list[0]].ilinx + this.hangouts[this.yes_list[1]].ilinx + this.hangouts[this.yes_list[2]].ilinx) / this.count
         this.dialog = true
       }
+    },
+    postLongTerm: function() {
+      const post_long_term_url = 'http://localhost:3000/long_trends'
+      axios.defaults.headers.common['Content-Type'] = 'application/json';
+      var params = new URLSearchParams();
+      params.append('agon', this.target_hangouts_agon);
+      params.append('alea', this.target_hangouts_alea);
+      params.append('mimicry', this.target_hangouts_mimicry);
+      params.append('ilinx', this.target_hangouts_ilinx);
+      params.append('user_id', this.user.id);
+      axios.post(post_long_term_url, params).then(
+        () => {
+          this.$router.push('MyPage')
+        },
+        (error) => {
+          return error
+        })
     }
   },
-  mounted() {
-    const url = 'http://localhost:3000/hangouts'
-    axios.get(url, {
+  created() {
+    const hangouts_url = 'http://localhost:3000/hangouts10'
+    axios.get(hangouts_url, {
       headers: { 
         "Content-Type": "application/json", 
       }
@@ -164,6 +179,19 @@ export default {
         console.log(response.data)
         this.hangouts = response.data;
         this.steps = this.hangouts.length
+      })
+    const show_url = 'http://localhost:3000/api/v1/show'
+    axios.get(show_url, {
+      headers: { 
+        "Content-Type": "application/json", 
+        "access-token": localStorage.getItem('access-token'),
+        "client": localStorage.getItem('client'),
+        "uid": localStorage.getItem('uid')
+      }
+    }
+    )
+      .then(response => {
+        this.user = response.data.data
       })
   }
 }

@@ -74,6 +74,23 @@ class Api::V1::UsersController < ApplicationController
     render json: { data: @current_posts }
   end
 
+  def current_get_long_trend
+    @current_long_trend = current_api_user.long_trend
+    render json: { data: @current_long_trend }
+  end
+
+  def get_long_trend
+    @user = User.find(params[:user_id])
+    @long_trend = @user.long_trend
+    render json: @long_trend 
+  end
+
+  def get_answer
+    @user = User.find(params[:user_id])
+    @answer = @user.questions.order(created_at: :desc).limit(1)
+    render json: @answer
+  end
+
  private
     def user_params
       params.permit(:user_id)

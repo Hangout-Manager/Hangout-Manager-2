@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :questions
+  resources :long_trends
   resources :hangouts
   resources :posts
   resources :user_profiles
@@ -6,6 +8,7 @@ Rails.application.routes.draw do
   post "follow" => "relationships#create"
   post "unfollow" => "relationships#destroy"
   get "isfollow/:id" => "relationships#is_follow"
+  get "hangouts10" => "hangouts#index10"
 
   namespace 'api' do
     namespace 'v1' do
@@ -21,6 +24,9 @@ Rails.application.routes.draw do
       get "get_followers/:id" => "users#get_followers"
       get "is_login" => "users#is_login"
       get "current_get_posts" => "users#current_get_post"
+      get "current_get_long_trend" => "users#current_get_long_trend"
+      get "get_long_trend/:user_id" => "users#get_long_trend"
+      get "get_answer/:user_id" => "users#get_answer"
     end
   end
 

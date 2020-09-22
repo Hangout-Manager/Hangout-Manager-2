@@ -14,6 +14,13 @@
     "_name": "_3f1a1c7a"
   },
   {
+    "name": "Question",
+    "path": "/Question",
+    "component": "/app/nuxt-project/pages/Question.vue",
+    "chunkName": "pages/Question",
+    "_name": "_982ceb7c"
+  },
+  {
     "name": "RegisterProfile",
     "path": "/RegisterProfile",
     "component": "/app/nuxt-project/pages/RegisterProfile.vue",

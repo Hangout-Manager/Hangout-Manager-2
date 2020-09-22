@@ -88,6 +88,7 @@ export default {
         { title: 'ユーザー一覧', click: '/Users', icon: 'mdi-account-multiple' },
         { title: '新規プロフィール登録', click: '/RegisterProfile', icon: 'mdi-flag' },
         { title: '長期トレンド登録', click: '/RegisterTrend', icon: 'mdi-flag' },
+        { title: '質問', click: '/Question', icon: 'mdi-flag' },
       ],
       item: ''
     }
