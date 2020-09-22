@@ -42,6 +42,22 @@
                       <v-list-item-content>性別</v-list-item-content>
                       <v-list-item-content class="align-end">{{ profile.sex }}</v-list-item-content>
                     </v-list-item>
+                    <v-list-item>
+                      <v-list-item-content>アゴン</v-list-item-content>
+                      <v-list-item-content class="align-end">{{ long_trend.agon }}</v-list-item-content>
+                    </v-list-item>
+                    <v-list-item>
+                      <v-list-item-content>アレア</v-list-item-content>
+                      <v-list-item-content class="align-end">{{ long_trend.alea }}</v-list-item-content>
+                    </v-list-item>
+                    <v-list-item>
+                      <v-list-item-content>ミミクリ</v-list-item-content>
+                      <v-list-item-content class="align-end">{{ long_trend.mimicry }}</v-list-item-content>
+                    </v-list-item>
+                    <v-list-item>
+                      <v-list-item-content>イリンクス</v-list-item-content>
+                      <v-list-item-content class="align-end">{{ long_trend.ilinx }}</v-list-item-content>
+                    </v-list-item>
                   </v-list>
                 </v-card>
               </v-col>
@@ -128,6 +144,7 @@ export default {
       followings: [],
       followers: [],
       posts: [],
+      long_trend: []
     }
   },
   components: {
@@ -216,6 +233,18 @@ export default {
     })
       .then(response => {
         this.posts = response.data.data
+      })
+    const long_trend_url = 'http://localhost:3000/api/v1/current_get_long_trend'
+    axios.get(long_trend_url, {
+      headers: { 
+        "Content-Type": "application/json", 
+        "access-token": localStorage.getItem('access-token'),
+        "client": localStorage.getItem('client'),
+        "uid": localStorage.getItem('uid')
+      }
+    })
+      .then(response => {
+        this.long_trend = response.data.data
       })
   }
 }

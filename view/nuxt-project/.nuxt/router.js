@@ -5,6 +5,7 @@ import scrollBehavior from './router.scrollBehavior.js'
 
 const _af18ebda = () => interopDefault(import('../pages/EditProfile.vue' /* webpackChunkName: "pages/EditProfile" */))
 const _3f1a1c7a = () => interopDefault(import('../pages/MyPage/index.vue' /* webpackChunkName: "pages/MyPage/index" */))
+const _982ceb7c = () => interopDefault(import('../pages/Question.vue' /* webpackChunkName: "pages/Question" */))
 const _7ed23c4c = () => interopDefault(import('../pages/RegisterProfile.vue' /* webpackChunkName: "pages/RegisterProfile" */))
 const _29821be4 = () => interopDefault(import('../pages/RegisterTrend.vue' /* webpackChunkName: "pages/RegisterTrend" */))
 const _4ea4145c = () => interopDefault(import('../pages/Users.vue' /* webpackChunkName: "pages/Users" */))
@@ -39,6 +40,10 @@ export const routerOptions = {
     path: "/MyPage",
     component: _3f1a1c7a,
     name: "MyPage"
+  }, {
+    path: "/Question",
+    component: _982ceb7c,
+    name: "Question"
   }, {
     path: "/RegisterProfile",
     component: _7ed23c4c,
