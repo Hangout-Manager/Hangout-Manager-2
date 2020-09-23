@@ -3,98 +3,90 @@
     "name": "EditProfile",
     "path": "/EditProfile",
     "component": "/app/nuxt-project/pages/EditProfile.vue",
-    "chunkName": "pages/EditProfile",
-    "_name": "_af18ebda"
+    "chunkName": "pages/EditProfile"
   },
   {
     "name": "MyPage",
     "path": "/MyPage",
     "component": "/app/nuxt-project/pages/MyPage/index.vue",
-    "chunkName": "pages/MyPage/index",
-    "_name": "_3f1a1c7a"
+    "chunkName": "pages/MyPage/index"
   },
   {
     "name": "Question",
     "path": "/Question",
     "component": "/app/nuxt-project/pages/Question.vue",
-    "chunkName": "pages/Question",
-    "_name": "_982ceb7c"
+    "chunkName": "pages/Question"
   },
   {
     "name": "RegisterProfile",
     "path": "/RegisterProfile",
     "component": "/app/nuxt-project/pages/RegisterProfile.vue",
-    "chunkName": "pages/RegisterProfile",
-    "_name": "_7ed23c4c"
+    "chunkName": "pages/RegisterProfile"
   },
   {
     "name": "RegisterTrend",
     "path": "/RegisterTrend",
     "component": "/app/nuxt-project/pages/RegisterTrend.vue",
-    "chunkName": "pages/RegisterTrend",
-    "_name": "_29821be4"
+    "chunkName": "pages/RegisterTrend"
   },
   {
     "name": "Timeline",
     "path": "/Timeline",
     "component": "/app/nuxt-project/pages/Timeline.vue",
-    "chunkName": "pages/Timeline",
-    "_name": "_15967d1d"
+    "chunkName": "pages/Timeline"
   },
   {
     "name": "Users",
     "path": "/Users",
     "component": "/app/nuxt-project/pages/Users.vue",
-    "chunkName": "pages/Users",
-    "_name": "_4ea4145c"
+    "chunkName": "pages/Users"
   },
   {
     "name": "MyPage-Followers",
     "path": "/MyPage/Followers",
     "component": "/app/nuxt-project/pages/MyPage/Followers/index.vue",
-    "chunkName": "pages/MyPage/Followers/index",
-    "_name": "_1540e2e0"
+    "chunkName": "pages/MyPage/Followers/index"
   },
   {
     "name": "MyPage-Followings",
     "path": "/MyPage/Followings",
     "component": "/app/nuxt-project/pages/MyPage/Followings/index.vue",
-    "chunkName": "pages/MyPage/Followings/index",
-    "_name": "_1023fcad"
+    "chunkName": "pages/MyPage/Followings/index"
   },
   {
     "name": "Hangouts-id",
     "path": "/Hangouts/:id?",
     "component": "/app/nuxt-project/pages/Hangouts/_id.vue",
-    "chunkName": "pages/Hangouts/_id",
-    "_name": "_14df1c5e"
+    "chunkName": "pages/Hangouts/_id"
+  },
+  {
+    "name": "Recommend-user_id",
+    "path": "/Recommend/:user_id?",
+    "component": "/app/nuxt-project/pages/Recommend/_user_id.vue",
+    "chunkName": "pages/Recommend/_user_id"
   },
   {
     "name": "user-id",
     "path": "/user/:id?",
     "component": "/app/nuxt-project/pages/user/_id.vue",
-    "chunkName": "pages/user/_id",
-    "_name": "_2144e09c"
+    "chunkName": "pages/user/_id"
   },
   {
     "name": "user-user_id-Followers",
     "path": "/user/:user_id?/Followers",
     "component": "/app/nuxt-project/pages/user/_user_id/Followers/index.vue",
-    "chunkName": "pages/user/_user_id/Followers/index",
-    "_name": "_d1786e9e"
+    "chunkName": "pages/user/_user_id/Followers/index"
   },
   {
     "name": "user-user_id-Followings",
     "path": "/user/:user_id?/Followings",
     "component": "/app/nuxt-project/pages/user/_user_id/Followings/index.vue",
-    "chunkName": "pages/user/_user_id/Followings/index",
-    "_name": "_63045e08"
+    "chunkName": "pages/user/_user_id/Followings/index"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/app/nuxt-project/pages/index.vue",
-    "chunkName": "pages/index",
-    "_name": "_dc6fcb74"
+    "chunkName": "pages/index"
   }
 ]
