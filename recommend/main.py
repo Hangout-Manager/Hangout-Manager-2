@@ -79,19 +79,19 @@ class HangoutsRecommender():
         for i, ho_idx in enumerate(rec_index):
             cons_covid[i,0] = self.covid_risk[ho_idx]
             cons_covid[i,1] = ho_idx
-        results = cons_covid[np.argsort(cons_covid[:,0])]
-        return results[0:5,1] + 1
+        results = cons_covid[np.argsort(-cons_covid[:,0])]
+        return results[0:5,1] + 1, results[0:5,0]
         
     def run(self):
         shortterm = ShortTerm(self.hangouts, self.lt_trand, self.answers)
         user_st = shortterm.run(self.answers)
         recommend = self.get_recommend(user_st)
-        ranking = self.get_ranking(recommend[:10])
-        return dict(r1=int(ranking[0]), 
-                    r2=int(ranking[1]), 
-                    r3=int(ranking[2]), 
-                    r4=int(ranking[3]), 
-                    r5=int(ranking[4]))
+        ranking, risk = self.get_ranking(recommend[:10])
+        return dict(r1=int(ranking[0]), r1_risk=int(risk[0]),
+                    r2=int(ranking[1]), r2_risk=int(risk[1]),
+                    r3=int(ranking[2]), r3_risk=int(risk[2]),
+                    r4=int(ranking[3]), r4_risk=int(risk[3]),
+                    r5=int(ranking[4]), r5_risk=int(risk[4]))
                            
                   
 class FriendsRecommender():
@@ -102,20 +102,27 @@ class FriendsRecommender():
         self.mm = preprocessing.MinMaxScaler()
 
     def calc_euclid(self):
-        results = np.linalg.norm(self.all_users - self.user, axis=1).reshape(-1,1)
+        results = []
+        for i, other in enumerate(self.all_users):
+            results.append(np.linalg.norm(other - self.user))
+        results = np.array(results).reshape(-1,1)
         return self.mm.fit_transform(results)
         
     def calc_cos_simi(self):
-        return cosine_similarity(self.all_users, self.user.reshape(-1,4))
+        results = []
+        for i, other in enumerate(self.all_users):
+            results.append(cosine_similarity(other.reshape(-1,4), self.user.reshape(-1,4)))
+        results = np.array(results).reshape(-1,1)
+        return results
     
     def calc_eval(self):
         euclid_vals = self.calc_euclid()
         simi_vals = self.calc_cos_simi()
-        eval_vals = simi_vals - euclid_vals
+        eval_vals = euclid_vals - simi_vals
         return eval_vals
     
     def get_ranking(self, eval_vals):
-        return np.argsort(eval_vals) + 1
+        return np.argsort(eval_vals.ravel()) + 1
     
     def run(self):
         eval_vals = self.calc_eval()
