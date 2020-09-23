@@ -8,22 +8,22 @@ class PreProcessing():
         dataset = pd.DataFrame(dataset)
         features = []
         for _, data in enumerate(dataset):
-            features.append([data["agon"].values,
-                             data["alea"].values,
-                             data["mimicry"].values, 
-                             data["ilinx"].values])
+            features.append([data.loc[:,"agon"].values,
+                             data.loc[:,"alea"].values,
+                             data.loc[:,"mimicry"].values, 
+                             data.loc[:,"ilinx"].values])
         return np.array(features)
                            
     def get_user_features(self, lt_trand):
         lt_trand = pd.DataFrame(lt_trand)
-        return np.array([lt_trand["agon"].values, 
-                         lt_trand["alea"].values, 
-                         lt_trand["mimicry"].values,
-                         lt_trand["ilinx"].values])
+        return np.array([lt_trand.loc[:,"agon"].values, 
+                         lt_trand.loc[:,"alea"].values, 
+                         lt_trand.loc[:,"mimicry"].values,
+                         lt_trand.loc[:,"ilinx"].values])
     
     def get_answers(self, answers):
         answers = pd.DataFrame(answers)
-        return np.array([answers["q1"].values, answers["q2"].values])
+        return np.array([answers.loc[:,"q1"].values, answers.loc[:,"q2"].values])
 
 
 class ShortTerm():
