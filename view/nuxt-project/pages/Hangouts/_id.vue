@@ -15,7 +15,14 @@
             <v-row>
               <v-col>
                 <v-card-title>{{ post.title }}</v-card-title>
-                <v-card-title>{{ isParticipated }}</v-card-title>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+                <v-card-text>参加者：</v-card-text>
+                <v-card-text v-for="user in participated_users">
+                  - {{ user.name }}
+                </v-card-text>
               </v-col>
             </v-row>
             <v-row>
@@ -47,13 +54,15 @@
 
 <script>
 import axios from 'axios'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   data () {
     return {
       post: [],
       current_user: [],
-      isParticipated: false,
+      isParticipated: '',
+      participated_users: [],
     }
   },
   methods: {
@@ -79,6 +88,7 @@ export default {
     },
   },
   created() {
+    // 投稿情報の取得
     const post_url = 'http://localhost:3000/posts/' + this.$route.params.id
     axios.get(post_url, {
       headers: { 
@@ -88,25 +98,46 @@ export default {
       .then(response => {
         this.post = response.data
       })
+
+    // 参加者すべての取得
+    const participated_user_url = 'http://localhost:3000/api/v1/get_participated_users/' + this.$route.params.id
+    axios.get(participated_user_url, {
+      headers: { 
+        "Content-Type": "application/json", 
+      }
+    })
+      .then(response => {
+        this.participated_users = response.data
+      })
+
+    // 自分が参加しているかの取得
     const is_participated_url = 'http://localhost:3000/isparticipated/' + this.$route.params.id
     axios.get(is_participated_url, {
       headers: { 
         "Content-Type": "application/json", 
-        "access-token": localStorage.getItem('access-token'),
-        "client": localStorage.getItem('client'),
-        "uid": localStorage.getItem('uid')
+        "access-token": this.$store.state.accessToken,
+        "client": this.$store.state.client,
+        "uid": this.$store.state.uid,
+        // "access-token": localStorage.getItem('access-token'),
+        // "client": localStorage.getItem('client'),
+        // "uid": localStorage.getItem('uid'),
       }
     })
       .then(response => {
         this.isParticipated = response.data
       })
+
+    // 現在のユーザー取得
     const current_user_url = 'http://localhost:3000/api/v1/show'
     axios.get(current_user_url, {
       headers: { 
         "Content-Type": "application/json", 
-        "access-token": localStorage.getItem('access-token'),
-        "client": localStorage.getItem('client'),
-        "uid": localStorage.getItem('uid')
+        "access-token": this.$store.state.accessToken,
+        "client": this.$store.state.client,
+        "uid": this.$store.state.uid,
+        // "access-token": localStorage.getItem('access-token'),
+        // "client": localStorage.getItem('client'),
+        // "uid": localStorage.getItem('uid'),
       }
     })
       .then(response => {

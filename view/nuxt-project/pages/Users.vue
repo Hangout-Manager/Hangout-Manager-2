@@ -2,6 +2,11 @@
   <div>
     <v-container>
       <v-row>
+        <v-col>
+          <h1>{{ this.$store.state.accessToken }}</h1>
+          <h1>{{ this.$store.state.client }}</h1>
+          <h1>{{ this.$store.state.uid }}</h1>
+        </v-col>
         <v-col v-for="user in users" :key="user.id" cols="3">
           <v-hover v-slot:default="{ hover }">
             <v-card
