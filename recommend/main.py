@@ -102,16 +102,16 @@ class FriendsRecommender():
         self.mm = preprocessing.MinMaxScaler()
 
     def calc_euclid(self):
-        results = np.linalg.norm(self.all_users - self.user, axis=1)
+        results = np.linalg.norm(self.all_users - self.user, axis=1).reshape(-1,1)
         return self.mm.fit_transform(results)
         
     def calc_cos_simi(self):
-        return cosine_similarity(self.all_users, self.user)
+        return cosine_similarity(self.all_users, self.user.reshape(-1,4))
     
     def calc_eval(self):
         euclid_vals = self.calc_euclid()
         simi_vals = self.calc_cos_simi()
-        eval_vals = euclid_vals - simi_vals
+        eval_vals = simi_vals - euclid_vals
         return eval_vals
     
     def get_ranking(self, eval_vals):
@@ -119,9 +119,9 @@ class FriendsRecommender():
     
     def run(self):
         eval_vals = self.calc_eval()
-        recom= get_ranking(eval_vals)
-        return dict(r1=recom[0], 
-                    r2=recom[1], 
-                    r3=recom[2], 
-                    r4=recom[3], 
-                    r5=recom[4])
+        recom = self.get_ranking(eval_vals)
+        return dict(r1=int(recom[0]), 
+                    r2=int(recom[1]), 
+                    r3=int(recom[2]), 
+                    r4=int(recom[3]), 
+                    r5=int(recom[4]))
