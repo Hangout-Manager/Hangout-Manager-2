@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :risks
   resources :questions
   resources :long_trends
   resources :hangouts
