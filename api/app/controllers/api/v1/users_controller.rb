@@ -91,6 +91,12 @@ class Api::V1::UsersController < ApplicationController
     render json: @answer
   end
 
+  def get_user_long_trend 
+    @user = User.find(params[:user_id])
+    @get_user_long_trend = @user.long_trend
+    render json: @get_user_long_trend
+  end
+
  private
     def user_params
       params.permit(:user_id)

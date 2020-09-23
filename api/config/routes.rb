@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       get "current_get_long_trend" => "users#current_get_long_trend"
       get "get_long_trend/:user_id" => "users#get_long_trend"
       get "get_answer/:user_id" => "users#get_answer"
+      get "get_user_long_trend/:user_id" => "users#get_user_long_trend"
     end
   end
 
