@@ -1,3 +1,6 @@
+require 'net/http'
+require 'json'
+
 class Api::V1::UsersController < ApplicationController
   # before_action :authenticate_api_user!
 
@@ -101,6 +104,13 @@ class Api::V1::UsersController < ApplicationController
     @post = Post.find(params[:post_id])
     @get_participated_users = @post.participated_users
     render json: @get_participated_users
+  end
+
+  def get_recommend
+    uri = URI.parse("http://recommend:5000/hangouts/#{params[:user_id]}/#{params[:question_id]}")
+    json = Net::HTTP.get(uri)
+    @recommend = JSON.parse(json)
+    render json: @recommend
   end
 
  private
