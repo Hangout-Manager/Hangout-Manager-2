@@ -37,6 +37,7 @@
               <v-row justify="center" align-content="center">
                 <v-col cols="5" v-for="post in posts">
                   <hangouts
+                    :id="post.id"
                     :label_id="post.label_id"
                     :title="post.title"
                     :content="post.content"
@@ -51,6 +52,7 @@
               <v-row justify="center" align-content="center">
                 <v-col cols="5" v-for="post in posts">
                   <hangouts
+                    :id="post.id"
                     :label_id="post.label_id"
                     :title="post.title"
                     :content="post.content"
@@ -65,6 +67,7 @@
               <v-row justify="center" align-content="center">
                 <v-col cols="5" v-for="post in posts">
                   <hangouts
+                    :id="post.id"
                     :label_id="post.label_id"
                     :title="post.title"
                     :content="post.content"

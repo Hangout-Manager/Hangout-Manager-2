@@ -63,6 +63,13 @@
     "_name": "_1023fcad"
   },
   {
+    "name": "Hangouts-id",
+    "path": "/Hangouts/:id?",
+    "component": "/app/nuxt-project/pages/Hangouts/_id.vue",
+    "chunkName": "pages/Hangouts/_id",
+    "_name": "_14df1c5e"
+  },
+  {
     "name": "user-id",
     "path": "/user/:id?",
     "component": "/app/nuxt-project/pages/user/_id.vue",
