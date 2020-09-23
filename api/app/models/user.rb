@@ -11,7 +11,15 @@ class User < ActiveRecord::Base
   has_many :questions, dependent: :destroy
 
   # post
-  has_many :posts
+  has_many :posts, dependent: :destroy
+
+  # participation
+  has_many :participations, dependent: :destroy
+  has_many :participated_posts, through: :participates, source: :post
+
+  def already_participated?(post)
+    self.participations.exists?(post_id: post.id)
+  end
 
   # follow
   has_many :relationships

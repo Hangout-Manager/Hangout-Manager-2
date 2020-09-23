@@ -10,6 +10,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1
   def show
+    @paricipation = Participation.new
     render json: @post
   end
 

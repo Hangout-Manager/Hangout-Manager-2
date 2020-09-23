@@ -7,7 +7,10 @@ Rails.application.routes.draw do
   resources :relationships, only: [:create, :destroy]
   post "follow" => "relationships#create"
   post "unfollow" => "relationships#destroy"
+  post "participate" => "participations#create"
+  post "unparticipate" => "participations#destroy"
   get "isfollow/:id" => "relationships#is_follow"
+  get "isparticipated/:id" => "participations#is_participated"
   get "hangouts10" => "hangouts#index10"
 
   namespace 'api' do
