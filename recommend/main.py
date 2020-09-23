@@ -1,23 +1,29 @@
 import numpy as np
 import pandas as pd
 from sklearn import preprocessing
+from sklearn.metrics.pairwise import cosine_similarity
 
 class PreProcessing():
-    def hangouts(self, hangouts):
-        ho_feat = []
-        for _, each in enumerate(hangouts):
-            ho_feat.append([each["agon"],
-                            each["alea"],
-                            each["mimicry"],
-                            each["ilinx"]]
-        return np.array(ho_feat)
+    def get_all_features(self, dataset):
+        dataset = pd.DataFrame(dataset)
+        features = []
+        for _, data in enumerate(dataset):
+            features.append([data.loc[:,"agon"].values,
+                             data.loc[:,"alea"].values,
+                             data.loc[:,"mimicry"].values, 
+                             data.loc[:,"ilinx"].values])
+        return np.array(features)
                            
-    def lt_trand(self, lt_trand):
-        return np.array([lt_trand["agon"], lt_trand["alea"], lt_trand["mimicry"], lt_trand["ilinx"]])
+    def get_user_features(self, lt_trand):
+        lt_trand = pd.DataFrame(lt_trand)
+        return np.array([lt_trand.loc[:,"agon"].values, 
+                         lt_trand.loc[:,"alea"].values, 
+                         lt_trand.loc[:,"mimicry"].values,
+                         lt_trand.loc[:,"ilinx"].values])
     
-    def answers(self, answers):
-        return np.array(answers["q1"],
-                        answers["q2"])
+    def get_answers(self, answers):
+        answers = pd.DataFrame(answers)
+        return np.array([answers.loc[:,"q1"].values, answers.loc[:,"q2"].values])
 
 
 class ShortTerm():
@@ -50,24 +56,61 @@ class ShortTerm():
     def run(self, anss):
         q1, q2 = self.preprocessing(anss)
         self.calc_st_trand(q1, q2, alpha=0.75)
-        return self.user_st
-        
+        return self.user_st        
 
 class HangoutsRecommender():
-    def __init__(self, hangouts, lt_trand, answers):
+    def __init__(self, hangouts, lt_trand, answers, covid_risk):
         self.ppc = PreProcessing()
-        self.hangouts = self.ppc.hangouts(hangouts)
-        self.lt_trand = self.ppc.lt_trand(lt_trand)
-        self.answers = self.ppc.answers(answers)
+        self.hangouts = self.ppc.get_all_features(hangouts)
+        self.lt_trand = self.ppc.get_user_features(lt_trand)
+        self.answers = self.ppc.get_answers(answers)
+        self.covid_risk = covid_risk
         
-    def calc_rank(self, user):
-        results =  np.linalg.norm(self.hangouts - user, axis=1)
-        return np.argsort(results) + 1
+    def get_recommend(self, user_st):
+        results =  np.linalg.norm(self.hangouts - user_st, axis=1)
+        return np.argsort(results)
+    
+    def get_ranking(self, rec_index):
+        cons_covid = np.array((10,2))
+        for i, ho_idx in enumerate(rec_index):
+            cons_covid[i,0] = self.covid_risk[ho_idx]
+            cons_covid[i,1] = ho_idx
+        results = cons_covid[np.argsort(cons_covid[:,0])]
+        return cons_covid[0:5,1] + 1
+        
         
     def run(self):
         shortterm = ShortTerm(self.hangouts, self.lt_trand, self.answers)
         user_st = shortterm.run(answers)
-        rank = calc_rank(user_st)
-        return dict(r1=rank[0], r2=rank[1], r3=rank[2], r4=rank[3], r5=rank[4])
+        recommend = self.get_recommend(user_st)
+        ranking = get_ranking(recommend[:10])
+        return dict(r1=ranking[0], r2=ranking[1], r3=ranking[2], r4=ranking[3], r5=ranking[4])
                            
-#class FriendsRecommender():
+                  
+class FriendsRecommender():
+    def __init__(self, all_users, user):
+        self.ppc = PreProcessing()
+        self.all_users = self.ppc.get_all_features(all_users)
+        self.user = self.ppc.get_user_features(user)
+        self.mm = preprocessing.MinMaxScaler()
+
+    def calc_euclid(self):
+        results = np.linalg.norm(self.all_users - self.user, axis=1)
+        return self.mm.fit_transform(results)
+        
+    def calc_cos_simi(self):
+        return cosine_similarity(self.all_users, self.user)
+    
+    def calc_eval(self):
+        euclid_vals = self.calc_euclid()
+        simi_vals = self.calc_cos_simi()
+        eval_vals = euclid_vals - simi_vals
+        return eval_vals
+    
+    def get_ranking(self, eval_vals):
+        return np.argsort(eval_vals) + 1
+    
+    def run(self):
+        eval_vals = self.calc_eval()
+        recom= get_ranking(eval_vals)
+        return dict(r1=recom[0], r2=recom[1], r3=recom[2], r4=recom[3], r5=recom[4])
