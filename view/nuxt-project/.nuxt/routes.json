@@ -35,6 +35,13 @@
     "_name": "_29821be4"
   },
   {
+    "name": "Timeline",
+    "path": "/Timeline",
+    "component": "/app/nuxt-project/pages/Timeline.vue",
+    "chunkName": "pages/Timeline",
+    "_name": "_15967d1d"
+  },
+  {
     "name": "Users",
     "path": "/Users",
     "component": "/app/nuxt-project/pages/Users.vue",

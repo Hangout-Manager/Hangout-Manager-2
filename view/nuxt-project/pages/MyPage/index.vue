@@ -66,24 +66,12 @@
                   <v-card-title class="subheading font-weight-bold">{{ user.name }}が予定しているあそび</v-card-title>
                   <v-row justify="center" align-content="center">
                     <v-col cols="5" v-for="post in posts">
-                    <v-hover v-slot:default="{ hover }">
-                      <v-card
-                        :elevation="hover ? 12 : 2"
-                        :class="{ 'on-hover': hover }"
-                        >
-                        <v-chip v-if="post.label_id==1" class="ma-2" dark color="primary">募集中</v-chip>
-                        <v-chip v-if="post.label_id==2" class="ma-2" dark color="green">募集締め切り</v-chip>
-                        <v-chip v-if="post.label_id==3" class="ma-2" dark color="red">終了</v-chip>
-                        <v-card-title>{{ post.title }}</v-card-title>
-                        <v-card-text>{{ post.content }}</v-card-text>
-                        <v-chip
-                          class="ma-2"
-                          label
-                          >
-                          {{ post.tag }}
-                        </v-chip>
-                      </v-card>
-                    </v-hover>
+                  <hangouts
+                    :label_id="post.label_id"
+                    :title="post.title"
+                    :content="post.content"
+                    :tag="post.tag"
+                   />
                     </v-col>
                   </v-row>
                 </v-card>
@@ -135,6 +123,7 @@
 
 <script>
 import Post from '../../components/Post.vue'
+import hangouts from '../../components/hangouts.vue'
 import axios from 'axios'
 export default {
   data () {
@@ -148,7 +137,8 @@ export default {
     }
   },
   components: {
-    Post
+    Post,
+    hangouts
   },
   methods: {
     open () {

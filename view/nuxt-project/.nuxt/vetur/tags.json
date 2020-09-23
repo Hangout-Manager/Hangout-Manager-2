@@ -5,6 +5,12 @@
   "LazyPost": {
     "description": "Auto imported from components/Post.vue"
   },
+  "Hangouts": {
+    "description": "Auto imported from components/hangouts.vue"
+  },
+  "LazyHangouts": {
+    "description": "Auto imported from components/hangouts.vue"
+  },
   "Signin": {
     "description": "Auto imported from components/signin.vue"
   },
