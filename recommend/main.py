@@ -5,16 +5,25 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 class PreProcessing():
     def get_all_features(self, dataset):
+        dataset = pd.DataFrame(dataset)
         features = []
         for _, data in enumerate(dataset):
-            features.append([data["agon"],data["alea"],data["mimicry"],data["ilinx"]])
+            features.append([data["agon"].values,
+                             data["alea"].values,
+                             data["mimicry"].values, 
+                             data["ilinx"].values])
         return np.array(features)
                            
     def get_user_features(self, lt_trand):
-        return np.array([lt_trand["agon"],lt_trand["alea"],lt_trand["mimicry"],lt_trand["ilinx"]])
+        lt_trand = pd.DataFrame(lt_trand)
+        return np.array([lt_trand["agon"].values, 
+                         lt_trand["alea"].values, 
+                         lt_trand["mimicry"].values,
+                         lt_trand["ilinx"].values])
     
     def get_answers(self, answers):
-        return np.array([answers["q1"],answers["q2"]])
+        answers = pd.DataFrame(answers)
+        return np.array([answers["q1"].values, answers["q2"].values])
 
 
 class ShortTerm():
