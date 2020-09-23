@@ -181,9 +181,12 @@ export default {
     axios.get(current_user_url, {
       headers: { 
         "Content-Type": "application/json", 
-        "access-token": localStorage.getItem('access-token'),
-        "client": localStorage.getItem('client'),
-        "uid": localStorage.getItem('uid')
+        // "access-token": localStorage.getItem('access-token'),
+        // "client": localStorage.getItem('client'),
+        // "uid": localStorage.getItem('uid'),
+        "access-token": this.$store.state.accessToken,
+        "client": this.$store.state.client,
+        "uid": this.$store.state.uid,
       }
     })
       .then(response => {
@@ -193,9 +196,12 @@ export default {
     axios.get(is_follow_url, {
       headers: { 
         "Content-Type": "application/json", 
-        "access-token": localStorage.getItem('access-token'),
-        "client": localStorage.getItem('client'),
-        "uid": localStorage.getItem('uid')
+        // "access-token": localStorage.getItem('access-token'),
+        // "client": localStorage.getItem('client'),
+        // "uid": localStorage.getItem('uid'),
+        "access-token": this.$store.state.accessToken,
+        "client": this.$store.state.client,
+        "uid": this.$store.state.uid,
       }
     })
       .then(response => {
@@ -205,9 +211,6 @@ export default {
     axios.get(following_url, {
       headers: { 
         "Content-Type": "application/json", 
-        "access-token": localStorage.getItem('access-token'),
-        "client": localStorage.getItem('client'),
-        "uid": localStorage.getItem('uid')
       }
     })
       .then(response => {
@@ -217,9 +220,6 @@ export default {
     axios.get(followers_url, {
       headers: { 
         "Content-Type": "application/json", 
-        "access-token": localStorage.getItem('access-token'),
-        "client": localStorage.getItem('client'),
-        "uid": localStorage.getItem('uid')
       }
     })
       .then(response => {

@@ -126,6 +126,7 @@
 import Post from '../../components/Post.vue'
 import hangouts from '../../components/hangouts.vue'
 import axios from 'axios'
+import { mapGetters, mapMutations } from 'vuex'
 export default {
   data () {
     return {
@@ -152,6 +153,9 @@ export default {
       axios.delete(url, {
         headers: { 
           "Content-Type": "application/json", 
+          "access-token": this.$store.state.accessToken,
+          "client": this.$store.state.client,
+          "uid": this.$store.state.uid,
           "access-token": localStorage.getItem('access-token'),
           "client": localStorage.getItem('client'),
           "uid": localStorage.getItem('uid')
@@ -165,78 +169,98 @@ export default {
     }
   },
   created() {
-    const user_url = 'http://localhost:3000/api/v1/show'
-    axios.get(user_url, {
-      headers: { 
-        "Content-Type": "application/json", 
-        "access-token": localStorage.getItem('access-token'),
-        "client": localStorage.getItem('client'),
-        "uid": localStorage.getItem('uid')
-      }
-    })
-      .then(response => {
-        this.user = response.data.data
+    if (process.client){
+      const user_url = 'http://localhost:3000/api/v1/show'
+      axios.get(user_url, {
+        headers: { 
+          "Content-Type": "application/json", 
+          "access-token": this.$store.state.accessToken,
+          "client": this.$store.state.client,
+          "uid": this.$store.state.uid,
+          "access-token": localStorage.getItem('access-token'),
+          "client": localStorage.getItem('client'),
+          "uid": localStorage.getItem('uid')
+        }
       })
-    const profile_url = 'http://localhost:3000/api/v1/profile'
-    axios.get(profile_url, {
-      headers: { 
-        "Content-Type": "application/json", 
-        "access-token": localStorage.getItem('access-token'),
-        "client": localStorage.getItem('client'),
-        "uid": localStorage.getItem('uid')
-      }
-    })
-      .then(response => {
-        this.profile = response.data.data
+        .then(response => {
+          this.user = response.data.data
+        })
+      const profile_url = 'http://localhost:3000/api/v1/profile'
+      axios.get(profile_url, {
+        headers: { 
+          "Content-Type": "application/json", 
+          "access-token": this.$store.state.accessToken,
+          "client": this.$store.state.client,
+          "uid": this.$store.state.uid,
+          "access-token": localStorage.getItem('access-token'),
+          "client": localStorage.getItem('client'),
+          "uid": localStorage.getItem('uid')
+        }
       })
-    const following_url = 'http://localhost:3000/api/v1/current_get_followings'
-    axios.get(following_url, {
-      headers: { 
-        "Content-Type": "application/json", 
-        "access-token": localStorage.getItem('access-token'),
-        "client": localStorage.getItem('client'),
-        "uid": localStorage.getItem('uid')
-      }
-    })
-      .then(response => {
-        this.followings = response.data.data
+        .then(response => {
+          this.profile = response.data.data
+        })
+      const following_url = 'http://localhost:3000/api/v1/current_get_followings'
+      axios.get(following_url, {
+        headers: { 
+          "Content-Type": "application/json", 
+          "access-token": this.$store.state.accessToken,
+          "client": this.$store.state.client,
+          "uid": this.$store.state.uid,
+          "access-token": localStorage.getItem('access-token'),
+          "client": localStorage.getItem('client'),
+          "uid": localStorage.getItem('uid')
+        }
       })
-    const followers_url = 'http://localhost:3000/api/v1/current_get_followers'
-    axios.get(followers_url, {
-      headers: { 
-        "Content-Type": "application/json", 
-        "access-token": localStorage.getItem('access-token'),
-        "client": localStorage.getItem('client'),
-        "uid": localStorage.getItem('uid')
-      }
-    })
-      .then(response => {
-        this.followers = response.data.data
+        .then(response => {
+          this.followings = response.data.data
+        })
+      const followers_url = 'http://localhost:3000/api/v1/current_get_followers'
+      axios.get(followers_url, {
+        headers: { 
+          "Content-Type": "application/json", 
+          "access-token": this.$store.state.accessToken,
+          "client": this.$store.state.client,
+          "uid": this.$store.state.uid,
+          "access-token": localStorage.getItem('access-token'),
+          "client": localStorage.getItem('client'),
+          "uid": localStorage.getItem('uid')
+        }
       })
-    const posts_url = 'http://localhost:3000/api/v1/current_get_posts'
-    axios.get(posts_url, {
-      headers: { 
-        "Content-Type": "application/json", 
-        "access-token": localStorage.getItem('access-token'),
-        "client": localStorage.getItem('client'),
-        "uid": localStorage.getItem('uid')
-      }
-    })
-      .then(response => {
-        this.posts = response.data.data
+        .then(response => {
+          this.followers = response.data.data
+        })
+      const posts_url = 'http://localhost:3000/api/v1/current_get_posts'
+      axios.get(posts_url, {
+        headers: { 
+          "Content-Type": "application/json", 
+          "access-token": this.$store.state.accessToken,
+          "client": this.$store.state.client,
+          "uid": this.$store.state.uid,
+          "access-token": localStorage.getItem('access-token'),
+          "client": localStorage.getItem('client'),
+          "uid": localStorage.getItem('uid')
+        }
       })
-    const long_trend_url = 'http://localhost:3000/api/v1/current_get_long_trend'
-    axios.get(long_trend_url, {
-      headers: { 
-        "Content-Type": "application/json", 
-        "access-token": localStorage.getItem('access-token'),
-        "client": localStorage.getItem('client'),
-        "uid": localStorage.getItem('uid')
-      }
-    })
-      .then(response => {
-        this.long_trend = response.data.data
+        .then(response => {
+          this.posts = response.data.data
+        })
+      const long_trend_url = 'http://localhost:3000/api/v1/current_get_long_trend'
+      axios.get(long_trend_url, {
+        headers: { 
+          "Content-Type": "application/json", 
+          "access-token": this.$store.state.accessToken,
+          "client": this.$store.state.client,
+          "uid": this.$store.state.uid,
+          "access-token": localStorage.getItem('access-token'),
+          "client": localStorage.getItem('client'),
+          "uid": localStorage.getItem('uid')
+        }
       })
+        .then(response => {
+          this.long_trend = response.data.data
+        })
+    }
   }
 }
 </script>

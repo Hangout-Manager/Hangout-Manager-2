@@ -15,7 +15,6 @@ Rails.application.routes.draw do
 
   namespace 'api' do
     namespace 'v1' do
-      # resources :users
       get "index" => "users#index"
       get "show" => "users#show"
       get "profile" => "users#profile"
@@ -31,6 +30,7 @@ Rails.application.routes.draw do
       get "get_long_trend/:user_id" => "users#get_long_trend"
       get "get_answer/:user_id" => "users#get_answer"
       get "get_user_long_trend/:user_id" => "users#get_user_long_trend"
+      get "get_participated_users/:post_id" => "users#get_participated_users"
     end
   end
 

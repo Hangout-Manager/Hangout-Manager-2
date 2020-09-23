@@ -97,6 +97,12 @@ class Api::V1::UsersController < ApplicationController
     render json: @get_user_long_trend
   end
 
+  def get_participated_users
+    @post = Post.find(params[:post_id])
+    @get_participated_users = @post.participated_users
+    render json: @get_participated_users
+  end
+
  private
     def user_params
       params.permit(:user_id)

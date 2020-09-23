@@ -54,6 +54,8 @@
 import Signup from '../components/signup.vue'
 import Signin from '../components/signin.vue'
 import axios from 'axios'
+import { mapGetters, mapMutations } from 'vuex'
+
 export default {
   name: "Welcome",
   data () {
@@ -83,6 +85,10 @@ export default {
       axios.defaults.headers.common['Content-Type'] = 'application/json';
       axios.post(url, params).then(
         (response) => {
+          this.$store.commit('setAccessToken', response.headers['access-token'])
+          this.$store.commit('setClient', response.headers['client'])
+          this.$store.commit('setUid', response.headers['uid'])
+          this.$store.commit('setTokenType', response.headers['token-type'])
           localStorage.setItem('access-token', response.headers['access-token'])
           localStorage.setItem('client', response.headers['client'])
           localStorage.setItem('uid', response.headers['uid'])

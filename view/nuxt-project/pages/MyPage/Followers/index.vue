@@ -28,6 +28,7 @@
 
 <script>
 import axios from 'axios'
+import { mapGetters, mapMutations } from 'vuex'
 export default {
   data () {
     return {
@@ -39,9 +40,12 @@ export default {
     axios.get(followers_url, {
       headers: { 
         "Content-Type": "application/json", 
-        "access-token": localStorage.getItem('access-token'),
-        "client": localStorage.getItem('client'),
-        "uid": localStorage.getItem('uid')
+        // "access-token": localStorage.getItem('access-token'),
+        // "client": localStorage.getItem('client'),
+        // "uid": localStorage.getItem('uid'),
+        "access-token": this.$store.state.accessToken,
+        "client": this.$store.state.client,
+        "uid": this.$store.state.uid,
       }
     })
       .then(response => {
