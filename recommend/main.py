@@ -79,19 +79,19 @@ class HangoutsRecommender():
         for i, ho_idx in enumerate(rec_index):
             cons_covid[i,0] = self.covid_risk[ho_idx]
             cons_covid[i,1] = ho_idx
-        results = cons_covid[np.argsort(cons_covid[:,0])]
-        return results[0:5,1] + 1
+        results = cons_covid[np.argsort(-cons_covid[:,0])]
+        return results[0:5,1] + 1, results[0:5,0]
         
     def run(self):
         shortterm = ShortTerm(self.hangouts, self.lt_trand, self.answers)
         user_st = shortterm.run(self.answers)
         recommend = self.get_recommend(user_st)
-        ranking = self.get_ranking(recommend[:10])
-        return dict(r1=int(ranking[0]), 
-                    r2=int(ranking[1]), 
-                    r3=int(ranking[2]), 
-                    r4=int(ranking[3]), 
-                    r5=int(ranking[4]))
+        ranking, risk = self.get_ranking(recommend[:10])
+        return dict(r1=int(ranking[0]), r1_risk=int(risk[0]),
+                    r2=int(ranking[1]), r2_risk=int(risk[1]),
+                    r3=int(ranking[2]), r3_risk=int(risk[2]),
+                    r4=int(ranking[3]), r4_risk=int(risk[3]),
+                    r5=int(ranking[4]), r5_risk=int(risk[4]))
                            
                   
 class FriendsRecommender():
