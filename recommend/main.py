@@ -10,14 +10,10 @@ class PreProcessing():
                             each["alea"],
                             each["mimicry"],
                             each["ilinx"]]
-        
         return np.array(ho_feat)
                            
     def lt_trand(self, lt_trand):
-        return np.array([lt_trand["agon"],
-                         lt_trand["alea"],
-                         lt_trand["mimicry"],
-                         lt_trand["ilinx"]])
+        return np.array([lt_trand["agon"], lt_trand["alea"], lt_trand["mimicry"], lt_trand["ilinx"]])
     
     def answers(self, answers):
         return np.array(answers["q1"],
@@ -37,14 +33,14 @@ class ShortTerm():
         return np.array([q1,q2])
         
     def calc_st_trand(self, q1, q2, alpha):
-        agon    = alpha * self.user_lt[0] 
-                + (1 - alpha) * 0.5 * ((1-self.answers[0]) + self.answers[1])
-        alea    = alpha * self.user_lt[1] 
-                + (1 - alpha) * 0.5 * ((1-self.answers[0]) + (1-self.answers[1]))
-        mimicry = alpha * self.user_lt[2]
-                + (1 - alpha) * 0.5 * (self.answers[0] + (1-self.answers[1]))
-        ilinx   = alpha * self.user_lt[3]
-                + (1 - alpha) * 0.5 * (self.answers[0] + self.answers[1])
+        agon    = (alpha * self.user_lt[0] 
+                + (1 - alpha) * 0.5 * ((1-self.answers[0]) + self.answers[1]))
+        alea    = (alpha * self.user_lt[1] 
+                + (1 - alpha) * 0.5 * ((1-self.answers[0]) + (1-self.answers[1])))
+        mimicry = (alpha * self.user_lt[2]
+                + (1 - alpha) * 0.5 * (self.answers[0] + (1-self.answers[1])))
+        ilinx   = (alpha * self.user_lt[3]
+                + (1 - alpha) * 0.5 * (self.answers[0] + self.answers[1]))
         self.update([agon,alea,mimicry,ilinx])
     
     def update(self, elements):
@@ -72,10 +68,6 @@ class HangoutsRecommender():
         shortterm = ShortTerm(self.hangouts, self.lt_trand, self.answers)
         user_st = shortterm.run(answers)
         rank = calc_rank(user_st)
-        return dict(r1=rank[0],
-                    r2=rank[1],
-                    r3=rank[2],
-                    r4=rank[3],
-                    r5=rank[4])
+        return dict(r1=rank[0], r2=rank[1], r3=rank[2], r4=rank[3], r5=rank[4])
                            
 #class FriendsRecommender():
