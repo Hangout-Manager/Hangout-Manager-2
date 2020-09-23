@@ -24,12 +24,11 @@ def hangouts_rec(user_lt_trend_id, user_ans_id):
     answers = json.loads(res_answers.data.decode('utf-8'))
     
     hor = HangoutsRecommender(hangouts, lt_trand, answers)
-    results = hor.run()
+
     return results
 
-
-# @app.route("/recommend/<post_id>/<post_id>/<post_id>")
-# def hello(post_id):
+# @app.route("/friends/<user_lt_trend_id>")
+# def friends_rec(user_lt_trend_id):
 #     url_hangouts = 'http://api:3000/posts/' + post_id
 #     res_hangouts = http.request('GET',url_hangout_all)
 #     hangouts = json.loads(res_hangouts.data.decode('utf-8'))
@@ -44,7 +43,7 @@ def hangouts_rec(user_lt_trend_id, user_ans_id):
     
 #     # fh = FriendsRecommender([d1,d2,d3,d4,d5,d6,d7,d8],[q1,q2,q3])
 
-#     return res.data.decode('utf-8')
+#     return res.data.decode('utf-8')"
 
 ## おまじない
 if __name__ == "__main__":
