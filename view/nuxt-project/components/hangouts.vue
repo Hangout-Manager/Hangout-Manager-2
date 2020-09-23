@@ -29,8 +29,8 @@
 export default {
   name: 'SakeInformation',
   props: {
-    id: String,
-    label_id: String,
+    id: Number,
+    label_id: Number,
     title: String,
     content: String,
     tag: String,
