@@ -107,7 +107,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def get_recommend
-    uri = URI.parse("http://recommend:5000/hangouts/#{params[:user_id]}/#{params[:question_id]}")
+    uri = URI.parse("http://recommend:5000/hangouts/#{params[:user_id]}")
     json = Net::HTTP.get(uri)
     @recommend = JSON.parse(json)
     render json: @recommend

@@ -53,12 +53,6 @@
                 large 
                 color="primary" 
                 @click="register"
-                :to="{
-                      name: 'Recommend-user_id',
-                      params:{
-                      user_id: this.user.id,
-                      }
-                      }"
                 >
                 回答
               </v-btn>
@@ -123,6 +117,9 @@ export default {
       params.append('q2', this.q2);
       params.append('user_id', this.user.id);
       axios.post(register_url, params).then(
+        () => {
+          this.$router.push('Recommend/' + this.user.id)
+        },
         (error) => {
           return error
         })
