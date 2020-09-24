@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
+const _834e8002 = () => interopDefault(import('../pages/CovidQuestion.vue' /* webpackChunkName: "pages/CovidQuestion" */))
 const _af18ebda = () => interopDefault(import('../pages/EditProfile.vue' /* webpackChunkName: "pages/EditProfile" */))
 const _3f1a1c7a = () => interopDefault(import('../pages/MyPage/index.vue' /* webpackChunkName: "pages/MyPage/index" */))
 const _982ceb7c = () => interopDefault(import('../pages/Question.vue' /* webpackChunkName: "pages/Question" */))
@@ -37,6 +38,10 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
+    path: "/CovidQuestion",
+    component: _834e8002,
+    name: "CovidQuestion"
+  }, {
     path: "/EditProfile",
     component: _af18ebda,
     name: "EditProfile"

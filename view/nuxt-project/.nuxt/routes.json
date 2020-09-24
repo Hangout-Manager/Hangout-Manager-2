@@ -1,5 +1,12 @@
 [
   {
+    "name": "CovidQuestion",
+    "path": "/CovidQuestion",
+    "component": "/app/nuxt-project/pages/CovidQuestion.vue",
+    "chunkName": "pages/CovidQuestion",
+    "_name": "_834e8002"
+  },
+  {
     "name": "EditProfile",
     "path": "/EditProfile",
     "component": "/app/nuxt-project/pages/EditProfile.vue",

@@ -126,9 +126,36 @@ class Api::V1::UsersController < ApplicationController
     render json: @recommend_friends
   end
 
+  def create_new_hangout
+    @user = User.find(new_hangout_params[:user_id])
+    @q1 = new_hangout_params[:q1]
+    @q2 = new_hangout_params[:q2]
+    @q3 = new_hangout_params[:q3]
+    @q4 = new_hangout_params[:q4]
+    @q5 = new_hangout_params[:q5]
+    p ("@q1")
+    p (@q1)
+    p ("@q2")
+    p (@q2)
+    p ("@q3")
+    p (@q3)
+    p ("@q4")
+    p (@q4)
+    p ("@q5")
+    p (@q5)
+    p ("@user")
+    p (@user)
+    @long_trend = @user.long_trend
+    p ("@long_trend")
+    p (@long_trend)
+  end
+
  private
     def user_params
       params.permit(:user_id)
     end
 
+    def new_hangout_params
+      params.permit(:name, :q1, :q2, :q3, :q4, :q5, :user_id)
+    end
 end

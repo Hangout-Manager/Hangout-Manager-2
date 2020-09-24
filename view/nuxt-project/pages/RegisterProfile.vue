@@ -22,9 +22,8 @@
               label="年齢"
               min="0"
               max="120"
-              thumb-label
+              thumb-label="always"
             ></v-slider>
-            <p style="text-align:center">{{ this.age }}歳</p>
             </v-col>
             <v-col cols="4"></v-col>
           </v-row>

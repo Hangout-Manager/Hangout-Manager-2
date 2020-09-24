@@ -1,0 +1,2 @@
+class CovidQuestion < ApplicationRecord
+end

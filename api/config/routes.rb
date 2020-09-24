@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :covid_questions
   resources :risks
   resources :questions
   resources :long_trends
@@ -37,6 +38,7 @@ Rails.application.routes.draw do
       get "get_recommend/:user_id/" => "users#get_recommend"
       get "get_comment/:post_id/" => "users#get_comment"
       get "get_friend_recommend/:user_id" => "users#get_friend_recommend"
+      post "create_new_hangout" => "users#create_new_hangout"
     end
   end
 
