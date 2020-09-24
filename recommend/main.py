@@ -36,8 +36,13 @@ class PreProcessing():
             users_info.append([user["id"], user["user_id"]])
         return np.array(users_info)
 
-    def get_covid_answers(self, covid_ans):
-        return np.array([covid_ans[0]["q3"], covid_ans[0]["q4"], covid_ans[0]["q5"]])
+    def get_st_answers(self, additional_ans):
+        return np.array([int(additional_ans[3]), int(additional_ans[4])])
+
+    def get_covid_answers(self, additional_ans):
+        return np.array([int(additional_ans[0])/10, 
+                         int(additional_ans[1])/10, 
+                         int(additional_ans[2])/10])
 
 
 class ShortTerm():
@@ -66,9 +71,8 @@ class ShortTerm():
         for i, element in enumerate(elements):
             self.user_st[i] = element
     
-    def run(self, anss):
-        q1, q2 = self.preprocessing(anss)
-        self.calc_st_trand(q1, q2, alpha=0.75)
+    def run(self):
+        self.calc_st_trand(self.answers[0], self.answers[1], alpha=0.75)
         return self.user_st        
 
 
@@ -150,10 +154,11 @@ class FriendsRecommender():
 
 
 class HangoutsFeatureCalculation():
-    def __init__(self, user, st_ans, covid_ans):
+    def __init__(self, user, additional_ans):
+        self.ppc = PreProcessing()
         self.user = self.ppc.get_user_features(user)
-        self.st_ans = self.ppc.get_answers(st_ans)
-        self.covid_ans = self.ppc.get_covid_answers(covid_ans)
+        self.st_ans = self.ppc.get_st_answers(additional_ans)
+        self.covid_ans = self.ppc.get_covid_answers(additional_ans)
         
         with open('./covid_risk.pickle', 'rb') as f:
             self.covid_model = pickle.load(f)   
@@ -163,7 +168,9 @@ class HangoutsFeatureCalculation():
         return self.cons_st_trend.run()
 
     def get_covid_risk(self):
-        covid_risk = self.covid_model.predict(self.covid_ans)
+        print(self.covid_ans.reshape(1,-1))
+        covid_risk = self.covid_model.predict(self.covid_ans.reshape(1,-1))
+        print(covid_risk)
         if covid_risk < 0.2 :
             return 5
         elif 0.2 <= covid_risk < 0.4:
@@ -177,7 +184,7 @@ class HangoutsFeatureCalculation():
 
     def run(self):
         st_trend = self.get_st_trend_feat()
-        covid_risk = self.get_covid_risk(self)
+        covid_risk = self.get_covid_risk()
         return dict(agon=st_trend[0], 
                     alea=st_trend[1],
                     mimicry=st_trend[2],
