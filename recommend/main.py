@@ -97,7 +97,7 @@ class HangoutsRecommender():
         
     def run(self):
         shortterm = ShortTerm(self.lt_trand, self.st_ans)
-        user_st = shortterm.run(self.st_ans)
+        user_st = shortterm.run()
         recommend = self.get_recommend(user_st)
         ranking, risk = self.get_ranking(recommend[:5])
         return dict(r1=int(ranking[0]), r1_risk=int(risk[0]),

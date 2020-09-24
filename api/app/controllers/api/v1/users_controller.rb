@@ -128,26 +128,28 @@ class Api::V1::UsersController < ApplicationController
 
   def create_new_hangout
     @user = User.find(new_hangout_params[:user_id])
+    p (@user.id)
     @q1 = new_hangout_params[:q1]
     @q2 = new_hangout_params[:q2]
     @q3 = new_hangout_params[:q3]
     @q4 = new_hangout_params[:q4]
     @q5 = new_hangout_params[:q5]
-    p ("@q1")
-    p (@q1)
-    p ("@q2")
-    p (@q2)
-    p ("@q3")
-    p (@q3)
-    p ("@q4")
-    p (@q4)
-    p ("@q5")
-    p (@q5)
-    p ("@user")
-    p (@user)
-    @long_trend = @user.long_trend
-    p ("@long_trend")
-    p (@long_trend)
+    uri = URI.parse("http://recommend:5000/additional/#{@user.id}/#{@q1.to_i}/#{@q2.to_i}/#{@q3.to_i}/#{@q4.to_i}/#{@q5.to_i}")
+    json = Net::HTTP.get(uri)
+    @new_hangout = JSON.parse(json)
+    p ("@new_hangout")
+    p (new_hangout_params[:name])
+    p (@new_hangout["agon"])
+    p (@new_hangout["agon"].class)
+    p (@new_hangout["alea"])
+    p (@new_hangout["mimicry"])
+    p (@new_hangout["ilinx"])
+    p (@new_hangout["risk"])
+    @hangout = Hangout.create(name:new_hangout_params[:name], agon:@new_hangout["agon"], alea:@new_hangout["alea"], mimicry:@new_hangout["mimicry"], ilinx:@new_hangout["ilinx"])
+    p ("@hangout")
+    p (@hangout.id)
+    Risk.create(hangout_id:@hangout.id, value:@new_hangout["risk"])
+    p (@hangout.risk)
   end
 
  private
