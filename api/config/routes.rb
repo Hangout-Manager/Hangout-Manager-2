@@ -34,6 +34,7 @@ Rails.application.routes.draw do
       get "get_user_long_trend/:user_id" => "users#get_user_long_trend"
       get "get_participated_users/:post_id" => "users#get_participated_users"
       get "get_recommend/:user_id/" => "users#get_recommend"
+      get "get_comment/:post_id/" => "users#get_comment"
     end
   end
 

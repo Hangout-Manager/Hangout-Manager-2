@@ -65,7 +65,7 @@
                 <v-card>
                   <v-card-title class="subheading font-weight-bold">{{ user.name }}が予定しているあそび</v-card-title>
                   <v-row justify="center" align-content="center">
-                    <v-col cols="5" v-for="post in posts">
+                    <v-col cols="5" v-for="post in posts" :key="post.id">
                   <hangouts
                     :id="post.id"
                     :label_id="post.label_id"

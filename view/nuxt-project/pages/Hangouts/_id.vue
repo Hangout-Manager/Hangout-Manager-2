@@ -21,7 +21,7 @@
             <v-row>
               <v-col>
                 <v-card-text>参加者：</v-card-text>
-                <v-card-text v-for="user in participated_users">
+                <v-card-text v-for="user in participated_users" :key="user.id">
                   - {{ user.name }}
                 </v-card-text>
               </v-col>
@@ -29,6 +29,11 @@
             <v-row>
               <v-col>
                 <v-card-text>{{ post.content }}</v-card-text>
+              </v-col>
+            </v-row>
+            <v-row v-for="comment in comments" :key="comment.id">
+              <v-col>
+                <v-card-text>{{comment.user_id}}:{{ comment.content }}</v-card-text>
               </v-col>
             </v-row>
             <v-row>
@@ -48,10 +53,35 @@
             </v-row>
             <v-row>
               <v-col>
-                <v-btn color="#AD1457" dark block @click="onClickComment">コメント</v-btn>
-                <comment ref="comment"
-                  :post_id="post.id"
-                />
+                <v-btn color="#AD1457" dark block @click="dialog=true">コメント</v-btn>
+                <v-row justify="center">
+                  <v-dialog
+                    v-model="dialog"
+                    max-width="600"
+                    >
+                    <v-card>
+                      <v-card-title>
+                        <span class="headline">コメントをする</span>
+                        <span class="headline">{{ post_id }}</span>
+                      </v-card-title>
+                      <v-card-text>
+                        <v-container>
+                          <v-row>
+                            <v-col cols="1"></v-col>
+                            <v-col cols="10">
+                              <v-text-field label="コメント" v-model="content" outlined height="200" rows="4" row-height="20" required></v-text-field>
+                            </v-col>
+                          </v-row>
+                        </v-container>
+                      </v-card-text>
+                      <v-card-actions>
+                        <v-btn color="blue darken-1" dark @click="dialog=false">閉じる</v-btn>
+                        <v-spacer></v-spacer>
+                        <v-btn color="blue darken-1" dark @click="comment">コメントする</v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </v-dialog>
+                </v-row>
               </v-col>
             </v-row>
           </v-card>
@@ -64,26 +94,19 @@
 <script>
 import axios from 'axios'
 import { mapGetters, mapMutations } from 'vuex'
-import Comment from '../../components/Comment.vue'
 
 export default {
   data () {
     return {
       post: [],
       current_user: [],
+      dialog: false,
+      comments: [],
       isParticipated: '',
       participated_users: [],
     }
   },
-  components: {
-    Comment
-  },
   methods: {
-    open () {
-    },
-    onClickComment() {
-      this.$refs.comment.open();
-    },
     participate: function() {
       const participate_url = 'http://localhost:3000/participate'
       axios.defaults.headers.common['Content-Type'] = 'application/json';
@@ -102,6 +125,16 @@ export default {
       params.append('post_id', this.$route.params.id);
       axios.post(unparticipate_url, params).then(
         this.isParticipated = false
+      )
+    },
+    comment: function() {
+      const comment_url = 'http://localhost:3000/comment/' + this.current_user.id
+      axios.defaults.headers.common['Content-Type'] = 'application/json';
+      var params = new URLSearchParams();
+      params.append('content', this.content);
+      params.append('post_id', this.$route.params.id);
+      axios.post(comment_url, params).then(
+        this.dialog = false
       )
     },
   },
@@ -126,6 +159,16 @@ export default {
     })
       .then(response => {
         this.participated_users = response.data
+      })
+
+    const get_comment_url = 'http://localhost:3000/api/v1/get_comment/' + this.$route.params.id
+    axios.get(get_comment_url, {
+      headers: { 
+        "Content-Type": "application/json", 
+      }
+    })
+      .then(response => {
+        this.comments = response.data
       })
 
     // 自分が参加しているかの取得

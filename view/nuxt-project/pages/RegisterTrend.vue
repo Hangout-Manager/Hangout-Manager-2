@@ -66,7 +66,7 @@
             <v-card
               >
               <v-card-title class="headline">以下のあそびであなたの好みを診断します</v-card-title>
-              <v-card-text v-for="name in target_hangouts_name">
+              <v-card-text v-for="name in target_hangouts_name" :key="name.id">
                 ・{{ name }}
               </v-card-text>
             <v-card-text>
