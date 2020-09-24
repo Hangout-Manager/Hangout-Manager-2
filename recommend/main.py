@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 from sklearn import preprocessing
 from sklearn.metrics.pairwise import cosine_similarity
+import pickle
 
 class PreProcessing():
     def get_all_features(self, dataset):
@@ -28,10 +29,21 @@ class PreProcessing():
             all_risks.append(data["value"])
         return np.array(all_risks)
 
+    def get_users_id(self, all_users):
+        users_info = []
+        for _, user in enumerate(all_users):
+            users_info.append([user["id"], user["user_id"]])
+        return np.array(users_info)
+
+    # def get_covid_answers(self, covid_ans):
+    #     return np.array([covid_ans[0]["q1"], covid_ans[0]["q2"], covid_ans[0]["q3"]])
+
+    # def get_new_hangout_id(self, covid_ans):
+    #     return covid_ans[0]["id"]
+
 
 class ShortTerm():
-    def __init__(self, hangouts, user_lt, answers):
-        self.hangouts = hangouts
+    def __init__(self, user_lt, answers):
         self.user_lt = user_lt
         self.answers = self.preprocessing(answers)    
         self.user_st = np.zeros(4)
@@ -63,11 +75,11 @@ class ShortTerm():
 
 
 class HangoutsRecommender():
-    def __init__(self, hangouts, lt_trand, answers, covid_risk):
+    def __init__(self, hangouts, lt_trand, st_ans, covid_risk):
         self.ppc = PreProcessing()
         self.hangouts = self.ppc.get_all_features(hangouts)
         self.lt_trand = self.ppc.get_user_features(lt_trand)
-        self.answers = self.ppc.get_answers(answers)
+        self.st_ans = self.ppc.get_answers(st_ans)
         self.covid_risk = self.ppc.get_all_risks(covid_risk)
         
     def get_recommend(self, user_st):
@@ -82,8 +94,8 @@ class HangoutsRecommender():
         return add_covid[:,0] + 1, add_covid[:,1]
         
     def run(self):
-        shortterm = ShortTerm(self.hangouts, self.lt_trand, self.answers)
-        user_st = shortterm.run(self.answers)
+        shortterm = ShortTerm(self.lt_trand, self.st_ans)
+        user_st = shortterm.run(self.st_ans)
         recommend = self.get_recommend(user_st)
         ranking, risk = self.get_ranking(recommend[:5])
         return dict(r1=int(ranking[0]), r1_risk=int(risk[0]),
@@ -96,21 +108,23 @@ class HangoutsRecommender():
 class FriendsRecommender():
     def __init__(self, all_users, user):
         self.ppc = PreProcessing()
-        self.all_users = self.ppc.get_all_features(all_users)
+        self.users_feat = self.ppc.get_all_features(all_users)
+        self.users_id = self.ppc.get_users_id(all_users)
         self.user = self.ppc.get_user_features(user)
         self.mm = preprocessing.MinMaxScaler()
 
     def calc_euclid(self):
         results = []
-        for i, other in enumerate(self.all_users):
-            results.append(np.linalg.norm(other - self.user))
+        for i, user_feat in enumerate(self.users_feat):
+            results.append(np.linalg.norm(user_feat - self.user))
         results = np.array(results).reshape(-1,1)
         return self.mm.fit_transform(results)
         
     def calc_cos_simi(self):
         results = []
-        for i, other in enumerate(self.all_users):
-            results.append(cosine_similarity(other.reshape(-1,4), self.user.reshape(-1,4)))
+        for i, user_feat in enumerate(self.users_feat):
+            results.append(cosine_similarity(
+                user_feat.reshape(-1,4), self.user.reshape(-1,4)))
         results = np.array(results).reshape(-1,1)
         return results
     
@@ -119,15 +133,34 @@ class FriendsRecommender():
         simi_vals = self.calc_cos_simi()
         eval_vals = euclid_vals - simi_vals
         return eval_vals
+
+    def comb_users_id(self, eval_vals):
+        return np.hstack([eval_vals, self.users_id])
     
     def get_ranking(self, eval_vals):
-        return np.argsort(eval_vals.ravel()) + 1
-    
+        return eval_vals[np.argsort(eval_vals[:,0])]
+
     def run(self):
         eval_vals = self.calc_eval()
-        recom = self.get_ranking(eval_vals)
-        return dict(r1=int(recom[0]), 
-                    r2=int(recom[1]), 
-                    r3=int(recom[2]), 
-                    r4=int(recom[3]), 
-                    r5=int(recom[4]))
+        comb_evals = self.comb_users_id(eval_vals)
+        ranked_id = self.get_ranking(comb_evals)
+        return dict(r1=int(ranked_id[0,2]), 
+                    r2=int(ranked_id[1,2]), 
+                    r3=int(ranked_id[2,2]), 
+                    r4=int(ranked_id[3,2]), 
+                    r5=int(ranked_id[4,2]))
+
+
+# class HangoutsFeatureCalculation():
+#     def __init__(self, user, st_ans, covid_ans):
+#         self.user = self.ppc.get_user_features(user)
+#         self.st_ans = self.ppc.get_answers(st_ans)
+#         self.covid_ans = self.ppc.get_covid_answers(covid_ans)
+#         self.new_ho_id = self.ppc.get_new_hangout_id(covid_ans)
+#         self.cons_st_trend = ShortTerm(user, st_ans)
+    
+#     def get_st_trend_feat(self,) 
+
+    
+
+
