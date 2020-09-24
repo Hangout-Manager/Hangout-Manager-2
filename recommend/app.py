@@ -5,6 +5,7 @@ import urllib3
 
 from main import HangoutsRecommender
 from main import FriendsRecommender
+#from main import HangoutsFeatureCalculation
 
 app = Flask(__name__)
 http = urllib3.PoolManager()
@@ -44,6 +45,27 @@ def friends_rec(user_lt_trend_id):
     fr = FriendsRecommender(all_users, user_lt_trand)
     results = fr.run()
     return results
+
+# @app.route("/additional/<user_lt_trend_id>")
+# def friends_rec(user_lt_trend_id):
+#     # 対象ユーザーの情報を取得
+#     url_user_lt_trand = 'http://api:3000/api/v1/get_long_trend/' + user_lt_trend_id
+#     res_user_lt_trand = http.request('GET',url_user_lt_trand)
+#     user_lt_trand = json.loads(res_user_lt_trand.data.decode('utf-8'))
+
+#     # 対象ユーザーの短期トレンドに関する質問回答の取得
+#     url_sl_answers = 'http://api:3000/api/v1/get_answer/' + user_lt_trend_id
+#     res_sl_answers = http.request('GET',url_sl_answers)
+#     sl_answers = json.loads(res_sl_answers.data.decode('utf-8'))
+
+#     # 登録する遊びに関する質問回答の取得
+#     url_covid_answers = 'http://api:3000/api/v1/get_answer/' + user_lt_trend_id
+#     res_covid_answers = http.request('GET',url_covid_answers)
+#     covid_answers = json.loads(res_covid_answers.data.decode('utf-8'))
+    
+#     hfc = HangoutsFeatureCalculation(user_lt_trand, sl_answers, covid_answers)
+#     results = hfc.run()
+#     return results
 
 ## おまじない
 if __name__ == "__main__":
