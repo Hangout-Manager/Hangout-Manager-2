@@ -1,4 +1,5 @@
 /view/nuxt-project/node_modules
+/front/vue-project/node_modules
 /api/log
 /api/tmp
 .DS_Store

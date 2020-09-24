@@ -28,6 +28,18 @@ services:
     networks:
       - proxy
 
+  front:
+    build: ./front
+    # command: npm run serve
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./front:/app
+    stdin_open: true
+    tty: true
+    environment:
+      - VUE_APP_URL=http://localhost
+
   view:
     container_name: "hangout-view"
     build: ./view
