@@ -4,20 +4,20 @@ class PostsController < ApplicationController
   # GET /posts
   def index
     @posts = Post.all
-
     render json: @posts
   end
 
   # GET /posts/1
   def show
     @paricipation = Participation.new
+    @comments = @post.comments
+    @comment = current_api_user.comments.new
     render json: @post
   end
 
   # POST /posts
   def create
     @post = Post.new(post_params)
-
     if @post.save
       render json: @post, status: :created, location: @post
     else

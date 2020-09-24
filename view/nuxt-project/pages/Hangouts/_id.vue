@@ -15,6 +15,7 @@
             <v-row>
               <v-col>
                 <v-card-title>{{ post.title }}</v-card-title>
+                <v-card-title>{{ isParticipated }}</v-card-title>
               </v-col>
             </v-row>
             <v-row>
@@ -45,6 +46,14 @@
               </v-col>
               <v-col cols="1"></v-col>
             </v-row>
+            <v-row>
+              <v-col>
+                <v-btn color="#AD1457" dark block @click="onClickComment">コメント</v-btn>
+                <comment ref="comment"
+                  :post_id="post.id"
+                />
+              </v-col>
+            </v-row>
           </v-card>
         </v-col>
       </v-row>
@@ -55,6 +64,7 @@
 <script>
 import axios from 'axios'
 import { mapGetters, mapMutations } from 'vuex'
+import Comment from '../../components/Comment.vue'
 
 export default {
   data () {
@@ -65,7 +75,15 @@ export default {
       participated_users: [],
     }
   },
+  components: {
+    Comment
+  },
   methods: {
+    open () {
+    },
+    onClickComment() {
+      this.$refs.comment.open();
+    },
     participate: function() {
       const participate_url = 'http://localhost:3000/participate'
       axios.defaults.headers.common['Content-Type'] = 'application/json';
