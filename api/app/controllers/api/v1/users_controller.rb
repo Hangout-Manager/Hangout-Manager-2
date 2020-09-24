@@ -119,6 +119,13 @@ class Api::V1::UsersController < ApplicationController
     render json: @comment
   end
 
+  def get_friend_recommend
+    uri = URI.parse("http://recommend:5000/friends/#{params[:user_id]}")
+    json = Net::HTTP.get(uri)
+    @recommend_friends = JSON.parse(json)
+    render json: @recommend_friends
+  end
+
  private
     def user_params
       params.permit(:user_id)

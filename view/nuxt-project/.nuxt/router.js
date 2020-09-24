@@ -14,6 +14,7 @@ const _1540e2e0 = () => interopDefault(import('../pages/MyPage/Followers/index.v
 const _1023fcad = () => interopDefault(import('../pages/MyPage/Followings/index.vue' /* webpackChunkName: "pages/MyPage/Followings/index" */))
 const _14df1c5e = () => interopDefault(import('../pages/Hangouts/_id.vue' /* webpackChunkName: "pages/Hangouts/_id" */))
 const _15eceb9f = () => interopDefault(import('../pages/Recommend/_user_id.vue' /* webpackChunkName: "pages/Recommend/_user_id" */))
+const _f9ed24b4 = () => interopDefault(import('../pages/RecommendUser/_id.vue' /* webpackChunkName: "pages/RecommendUser/_id" */))
 const _2144e09c = () => interopDefault(import('../pages/user/_id.vue' /* webpackChunkName: "pages/user/_id" */))
 const _d1786e9e = () => interopDefault(import('../pages/user/_user_id/Followers/index.vue' /* webpackChunkName: "pages/user/_user_id/Followers/index" */))
 const _63045e08 = () => interopDefault(import('../pages/user/_user_id/Followings/index.vue' /* webpackChunkName: "pages/user/_user_id/Followings/index" */))
@@ -79,6 +80,10 @@ export const routerOptions = {
     path: "/Recommend/:user_id?",
     component: _15eceb9f,
     name: "Recommend-user_id"
+  }, {
+    path: "/RecommendUser/:id?",
+    component: _f9ed24b4,
+    name: "RecommendUser-id"
   }, {
     path: "/user/:id?",
     component: _2144e09c,

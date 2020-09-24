@@ -8,6 +8,11 @@ class LongTrendsController < ApplicationController
     render json: @long_trends
   end
 
+  def index_without_me
+    @long_trends_without_me = LongTrend.all.where.not(user_id: params[:user_id])
+    render json: @long_trends_without_me
+  end
+
   # GET /long_trends/1
   def show
     render json: @long_trend

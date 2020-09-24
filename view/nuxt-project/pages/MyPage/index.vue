@@ -12,6 +12,14 @@
                   <post ref="post"/> 
                 <hr>
                   <v-btn color="#AD1457" dark block @click="onClickPost">あそびを投稿する</v-btn>
+                  <v-btn color="#AD1457" dark block 
+                         :to="{
+                               name: 'RecommendUser-id',
+                               params:{
+                               id:this.user.id
+                               }
+                               }"
+                         >友達レコメンド</v-btn>
               </v-col>
               <v-col cols="1"></v-col>
             </v-row>

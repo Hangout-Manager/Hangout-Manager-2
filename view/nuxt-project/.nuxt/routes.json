@@ -77,6 +77,13 @@
     "_name": "_15eceb9f"
   },
   {
+    "name": "RecommendUser-id",
+    "path": "/RecommendUser/:id?",
+    "component": "/app/nuxt-project/pages/RecommendUser/_id.vue",
+    "chunkName": "pages/RecommendUser/_id",
+    "_name": "_f9ed24b4"
+  },
+  {
     "name": "user-id",
     "path": "/user/:id?",
     "component": "/app/nuxt-project/pages/user/_id.vue",
