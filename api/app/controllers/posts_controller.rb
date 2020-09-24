@@ -11,7 +11,7 @@ class PostsController < ApplicationController
   def show
     @paricipation = Participation.new
     @comments = @post.comments
-    @comment = current_api_user.comments.new
+    # @comment = current_api_user.comments.new
     render json: @post
   end
 

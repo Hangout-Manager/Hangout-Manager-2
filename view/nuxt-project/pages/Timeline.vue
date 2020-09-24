@@ -35,7 +35,7 @@
           <v-tab-item>
             <v-card flat>
               <v-row justify="center" align-content="center">
-                <v-col cols="5" v-for="post in posts">
+                <v-col cols="5" v-for="post in posts" :key="post.id">
                   <hangouts
                     :id="post.id"
                     :label_id="post.label_id"
@@ -50,7 +50,7 @@
           <v-tab-item>
             <v-card flat>
               <v-row justify="center" align-content="center">
-                <v-col cols="5" v-for="post in posts">
+                <v-col cols="5" v-for="post in posts" :key="post.id">
                   <hangouts
                     :id="post.id"
                     :label_id="post.label_id"
@@ -65,7 +65,7 @@
           <v-tab-item>
             <v-card flat>
               <v-row justify="center" align-content="center">
-                <v-col cols="5" v-for="post in posts">
+                <v-col cols="5" v-for="post in posts" :key="post.id">
                   <hangouts
                     :id="post.id"
                     :label_id="post.label_id"

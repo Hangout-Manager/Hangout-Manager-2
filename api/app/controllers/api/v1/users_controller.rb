@@ -113,6 +113,12 @@ class Api::V1::UsersController < ApplicationController
     render json: @recommend
   end
 
+  def get_comment
+    @post = Post.find(params[:post_id])
+    @comment = @post.comments
+    render json: @comment
+  end
+
  private
     def user_params
       params.permit(:user_id)

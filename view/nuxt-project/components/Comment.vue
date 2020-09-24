@@ -32,9 +32,6 @@
 import axios from 'axios'
 export default {
   name: 'post',
-  props: {
-    post_id: Number
-  },
   data () {
     return {
       show: false,
