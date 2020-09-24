@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get "isparticipated/:id" => "participations#is_participated"
   get "hangouts10" => "hangouts#index10"
   post "comment/:user_id" => "comments#create"
+  get "long_trends_without_me/:user_id" => "long_trends#index_without_me"
 
   namespace 'api' do
     namespace 'v1' do
@@ -35,6 +36,7 @@ Rails.application.routes.draw do
       get "get_participated_users/:post_id" => "users#get_participated_users"
       get "get_recommend/:user_id/" => "users#get_recommend"
       get "get_comment/:post_id/" => "users#get_comment"
+      get "get_friend_recommend/:user_id" => "users#get_friend_recommend"
     end
   end
 
