@@ -75,18 +75,17 @@ class HangoutsRecommender():
         return np.argsort(results)
     
     def get_ranking(self, rec_index):
-        cons_covid = np.zeros((10,2))
+        add_covid = np.zeros((5,2))
         for i, ho_idx in enumerate(rec_index):
-            cons_covid[i,0] = self.covid_risk[ho_idx]
-            cons_covid[i,1] = ho_idx
-        results = cons_covid[np.argsort(-cons_covid[:,0])]
-        return results[0:5,1] + 1, results[0:5,0]
+            add_covid[i,0] = ho_idx
+            add_covid[i,1] = self.covid_risk[ho_idx]
+        return add_covid[:,0] + 1, add_covid[:,1]
         
     def run(self):
         shortterm = ShortTerm(self.hangouts, self.lt_trand, self.answers)
         user_st = shortterm.run(self.answers)
         recommend = self.get_recommend(user_st)
-        ranking, risk = self.get_ranking(recommend[:10])
+        ranking, risk = self.get_ranking(recommend[:5])
         return dict(r1=int(ranking[0]), r1_risk=int(risk[0]),
                     r2=int(ranking[1]), r2_risk=int(risk[1]),
                     r3=int(ranking[2]), r3_risk=int(risk[2]),
