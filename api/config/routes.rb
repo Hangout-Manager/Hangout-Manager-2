@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get "isfollow/:id" => "relationships#is_follow"
   get "isparticipated/:id" => "participations#is_participated"
   get "hangouts10" => "hangouts#index10"
+  post "comment/:user_id" => "comments#create"
 
   namespace 'api' do
     namespace 'v1' do

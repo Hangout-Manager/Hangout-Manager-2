@@ -1,4 +1,10 @@
 {
+  "Comment": {
+    "description": "Auto imported from components/Comment.vue"
+  },
+  "LazyComment": {
+    "description": "Auto imported from components/Comment.vue"
+  },
   "Post": {
     "description": "Auto imported from components/Post.vue"
   },

@@ -13,6 +13,9 @@ class User < ActiveRecord::Base
   # post
   has_many :posts, dependent: :destroy
 
+  # commnet
+  has_many :comments
+
   # participation
   has_many :participations, dependent: :destroy
   has_many :participated_posts, through: :participates, source: :post
