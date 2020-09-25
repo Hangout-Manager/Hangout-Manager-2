@@ -46,6 +46,7 @@ Rails.application.routes.draw do
       get "get_participations/:id" => "users#get_participations"
       get "get_posts/:id" => "users#get_posts"
       get "get_post_user/:post_id" => "users#get_post_user"
+      get "get_post_start_time/:post_id" => "users#get_post_start_time"
     end
   end
 
