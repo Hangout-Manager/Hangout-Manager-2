@@ -24,8 +24,42 @@
             <v-row>
               <v-col cols="1"></v-col>
               <v-col cols="10">
-                <v-btn v-if="isParticipated" color="#AD1457" block dark @click="unparticipate">参加を取り消す</v-btn>
-                <v-btn v-else color="#1976D2" block dark @click="participate">参加する</v-btn>
+                <div v-if="this.current_user.id == this.post_user.id">
+                    <div v-if="this.post.label_id==1">
+                      <v-row>
+                        <v-col cols="6">
+                          <v-btn color="green" block dark @click="update2">募集締め切りにする</v-btn>
+                        </v-col>
+                        <v-col cols="6">
+                          <v-btn color="red" block dark @click="update3">終了にする</v-btn>
+                        </v-col>
+                      </v-row>
+                    </div>
+                    <div v-if="this.post.label_id==2">
+                      <v-row>
+                        <v-col cols="6">
+                          <v-btn color="blue" block dark @click="update1">募集中にする</v-btn>
+                        </v-col>
+                        <v-col cols="6">
+                          <v-btn color="red" block dark @click="update3">終了にする</v-btn>
+                        </v-col>
+                      </v-row>
+                    </div>
+                    <div v-if="this.post.label_id==3">
+                      <v-row>
+                        <v-col cols="6">
+                          <v-btn color="blue" block dark @click="update1">募集中にする</v-btn>
+                        </v-col>
+                        <v-col cols="6">
+                          <v-btn color="green" block dark @click="update2">募集締め切りにする</v-btn>
+                        </v-col>
+                      </v-row>
+                    </div>
+                </div>
+                <div v-else>
+                  <v-btn v-if="isParticipated" color="#AD1457" block dark @click="unparticipate">参加を取り消す</v-btn>
+                  <v-btn v-else color="#1976D2" block dark @click="participate">参加する</v-btn>
+                </div>
               </v-col>
               <v-col cols="1"></v-col>
             </v-row>
@@ -43,7 +77,7 @@
                   </v-row>
                 </v-card>
                 <v-card>
-                  <v-card-title>参加者</v-card-title>
+                  <v-card-title>参加者 ({{ this.participated_users.length }}/{{ post.upper_number }})</v-card-title>
                   <v-row v-for="user in participated_users" :key="user.id">
                     <v-col cols="1"></v-col>
                     <v-col>
@@ -137,6 +171,33 @@ export default {
     }
   },
   methods: {
+    update1: function() {
+      const update_url = 'http://localhost:3000/posts/' + this.$route.params.id
+      axios.defaults.headers.common['Content-Type'] = 'application/json';
+      var params = new URLSearchParams();
+      params.append('label_id', 1);
+      axios.put(update_url, params).then(
+        this.$router.go({path: this.$router.currentRoute.path, force: true})
+      )
+    },
+    update2: function() {
+      const update_url = 'http://localhost:3000/posts/' + this.$route.params.id
+      axios.defaults.headers.common['Content-Type'] = 'application/json';
+      var params = new URLSearchParams();
+      params.append('label_id', 2);
+      axios.put(update_url, params).then(
+        this.$router.go({path: this.$router.currentRoute.path, force: true})
+      )
+    },
+    update3: function() {
+      const update_url = 'http://localhost:3000/posts/' + this.$route.params.id
+      axios.defaults.headers.common['Content-Type'] = 'application/json';
+      var params = new URLSearchParams();
+      params.append('label_id', 3);
+      axios.put(update_url, params).then(
+        this.$router.go({path: this.$router.currentRoute.path, force: true})
+      )
+    },
     participate: function() {
       const participate_url = 'http://localhost:3000/participate'
       axios.defaults.headers.common['Content-Type'] = 'application/json';
