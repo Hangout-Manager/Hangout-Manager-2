@@ -34,7 +34,7 @@ def hangouts_rec(user_lt_trend_id):
 
 @app.route("/friends/<user_lt_trend_id>")
 def friends_rec(user_lt_trend_id):
-    url_all_users = 'http://api:3000/long_trends/'
+    url_all_users = 'http://api:3000/long_trends_without_me/' + user_lt_trend_id
     res_all_users = http.request('GET',url_all_users)
     all_users = json.loads(res_all_users.data.decode('utf-8'))
 
