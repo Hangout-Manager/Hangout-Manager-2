@@ -142,7 +142,13 @@ class Api::V1::UsersController < ApplicationController
   def get_comment
     @post = Post.find(params[:post_id])
     @comment = @post.comments
-    render json: @comment
+    @c_list = []
+    @c_user_list = []
+    for c in @comment
+      @c_list << c
+      @c_user_list << c.user
+    end
+    render json: [comments: @c_list, users: @c_user_list]
   end
 
   def get_friend_recommend

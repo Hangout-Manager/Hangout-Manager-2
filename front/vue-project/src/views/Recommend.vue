@@ -6,21 +6,56 @@
           <h1>これらの遊びはいかがですか？</h1>
         </v-col>
       </v-row>
-      <v-row v-for="hangout in hangouts" :key="hangout.id">
-        <v-col v-if="hangout.id==recommend.r1"><v-card @click="onClickPost()"><v-card-text>安全度：{{ recommend.r1_risk }}</v-card-text><v-card-title>{{ hangout.name }}</v-card-title></v-card></v-col>
         <post ref="post"/> 
+      <v-row v-for="hangout in hangouts" :key="hangout.id">
+        <v-col v-if="hangout.id==recommend.r1"><v-card @click="onClickPost">
+            <v-card-title>安全度:
+              <v-rating
+                v-model="recommend.r3_risk"
+                background-color="orange lighten-3"
+                color="orange"
+                ></v-rating>
+            </v-card-title><v-card-title class="headline">{{ hangout.name }}</v-card-title></v-card></v-col>
       </v-row>
       <v-row v-for="hangout in hangouts" :key="hangout.id">
-        <v-col v-if="hangout.id==recommend.r2"><v-card><v-card-text>安全度：{{ recommend.r2_risk }}</v-card-text><v-card-title>{{ hangout.name }}</v-card-title></v-card></v-col>
+        <v-col v-if="hangout.id==recommend.r2"><v-card @click="onClickPost">
+            <v-card-title>安全度:
+              <v-rating
+                v-model="recommend.r2_risk"
+                background-color="orange lighten-3"
+                color="orange"
+                ></v-rating>
+            </v-card-title><v-card-title class="headline">{{ hangout.name }}</v-card-title></v-card></v-col>
       </v-row>
       <v-row v-for="hangout in hangouts" :key="hangout.id">
-        <v-col v-if="hangout.id==recommend.r3"><v-card><v-card-text>安全度：{{ recommend.r3_risk }}</v-card-text><v-card-title>{{ hangout.name }}</v-card-title></v-card></v-col>
+        <v-col v-if="hangout.id==recommend.r3"><v-card @click="onClickPost">
+            <v-card-title>安全度:
+              <v-rating
+                v-model="recommend.r3_risk"
+                background-color="orange lighten-3"
+                color="orange"
+                ></v-rating>
+            </v-card-title><v-card-title class="headline">{{ hangout.name }}</v-card-title></v-card></v-col>
       </v-row>
       <v-row v-for="hangout in hangouts" :key="hangout.id">
-        <v-col v-if="hangout.id==recommend.r4"><v-card><v-card-text>安全度：{{ recommend.r4_risk }}</v-card-text><v-card-title>{{ hangout.name }}</v-card-title></v-card></v-col>
+        <v-col v-if="hangout.id==recommend.r4"><v-card @click="onClickPost">
+            <v-card-title>安全度:
+              <v-rating
+                v-model="recommend.r4_risk"
+                background-color="orange lighten-3"
+                color="orange"
+                ></v-rating>
+            </v-card-title><v-card-title class="headline">{{ hangout.name }}</v-card-title></v-card></v-col>
       </v-row>
       <v-row v-for="hangout in hangouts" :key="hangout.id">
-        <v-col v-if="hangout.id==recommend.r5"><v-card><v-card-text>安全度：{{ recommend.r5_risk }}</v-card-text><v-card-title>{{ hangout.name }}</v-card-title></v-card></v-col>
+        <v-col v-if="hangout.id==recommend.r5"><v-card @click="onClickPost">
+            <v-card-title>安全度:
+              <v-rating
+                v-model="recommend.r5_risk"
+                background-color="orange lighten-3"
+                color="orange"
+                ></v-rating>
+            </v-card-title><v-card-title class="headline">{{ hangout.name }}</v-card-title></v-card></v-col>
       </v-row>
     </v-container>
   </div>

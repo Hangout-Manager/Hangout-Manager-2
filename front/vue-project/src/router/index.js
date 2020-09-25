@@ -16,6 +16,7 @@ import AddHangout from '../views/AddHangout.vue'
 import User from '../views/user.vue'
 import UserFollowings from '../views/UserFollowings.vue'
 import UserFollowers from '../views/UserFollowers.vue'
+import DateTime from '../views/DateTime.vue'
 
 Vue.use(VueRouter)
 
@@ -24,6 +25,11 @@ const routes = [
     path: '/',
     name: 'Welcome',
     component: Welcome
+  },
+  {
+    path: '/DateTime',
+    name: 'DateTime',
+    component: DateTime
   },
   {
     path: '/MyPage',

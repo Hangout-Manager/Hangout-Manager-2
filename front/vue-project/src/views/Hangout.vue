@@ -24,8 +24,42 @@
             <v-row>
               <v-col cols="1"></v-col>
               <v-col cols="10">
-                <v-btn v-if="isParticipated" color="#AD1457" block dark @click="unparticipate">参加を取り消す</v-btn>
-                <v-btn v-else color="#1976D2" block dark @click="participate">参加する</v-btn>
+                <div v-if="this.current_user.id == this.post_user.id">
+                    <div v-if="this.post.label_id==1">
+                      <v-row>
+                        <v-col cols="6">
+                          <v-btn color="green" block dark @click="update2">募集締め切りにする</v-btn>
+                        </v-col>
+                        <v-col cols="6">
+                          <v-btn color="red" block dark @click="update3">終了にする</v-btn>
+                        </v-col>
+                      </v-row>
+                    </div>
+                    <div v-if="this.post.label_id==2">
+                      <v-row>
+                        <v-col cols="6">
+                          <v-btn color="blue" block dark @click="update1">募集中にする</v-btn>
+                        </v-col>
+                        <v-col cols="6">
+                          <v-btn color="red" block dark @click="update3">終了にする</v-btn>
+                        </v-col>
+                      </v-row>
+                    </div>
+                    <div v-if="this.post.label_id==3">
+                      <v-row>
+                        <v-col cols="6">
+                          <v-btn color="blue" block dark @click="update1">募集中にする</v-btn>
+                        </v-col>
+                        <v-col cols="6">
+                          <v-btn color="green" block dark @click="update2">募集締め切りにする</v-btn>
+                        </v-col>
+                      </v-row>
+                    </div>
+                </div>
+                <div v-else>
+                  <v-btn v-if="isParticipated" color="#AD1457" block dark @click="unparticipate">参加を取り消す</v-btn>
+                  <v-btn v-else color="#1976D2" block dark @click="participate">参加する</v-btn>
+                </div>
               </v-col>
               <v-col cols="1"></v-col>
             </v-row>
@@ -43,7 +77,7 @@
                   </v-row>
                 </v-card>
                 <v-card>
-                  <v-card-title>参加者</v-card-title>
+                  <v-card-title>参加者 ({{ this.participated_users.length }}/{{ post.upper_number }})</v-card-title>
                   <v-row v-for="user in participated_users" :key="user.id">
                     <v-col cols="1"></v-col>
                     <v-col>
@@ -56,12 +90,19 @@
               <v-col cols="7">
                 <v-card>
                   <v-card-title>コメント</v-card-title>
-                  <v-row v-for="comment in comments" :key="comment.id">
+                  <v-row v-for="(comment, i) in comments" :key="i">
                     <v-col cols="1"></v-col>
-                    <v-col>
-                      <v-card-text>{{ comment.content }}</v-card-text>
+                    <v-col cols="2">
+                      <v-btn color="black" dark block text :to="{name:'user', params:{id:users[i].id}}">{{ users[i].name }}</v-btn>
                     </v-col>
-                    <v-col cols="1"></v-col>
+                    <v-col cols="1">
+                      <v-avatar color="indigo">
+                        <v-icon dark align-content="center">mdi-account-circle</v-icon>
+                      </v-avatar>
+                    </v-col>
+                    <v-col cols="3">
+                      <p class="my-parts">{{ comment.content }}</p>
+                    </v-col>
                   </v-row>
                   <v-row>
                     <v-col cols="1"></v-col>
@@ -124,11 +165,39 @@ export default {
       current_user: [],
       dialog: false,
       comments: [],
+      users: [],
       isParticipated: '',
       participated_users: [],
     }
   },
   methods: {
+    update1: function() {
+      const update_url = 'http://localhost:3000/posts/' + this.$route.params.id
+      axios.defaults.headers.common['Content-Type'] = 'application/json';
+      var params = new URLSearchParams();
+      params.append('label_id', 1);
+      axios.put(update_url, params).then(
+        this.$router.go({path: this.$router.currentRoute.path, force: true})
+      )
+    },
+    update2: function() {
+      const update_url = 'http://localhost:3000/posts/' + this.$route.params.id
+      axios.defaults.headers.common['Content-Type'] = 'application/json';
+      var params = new URLSearchParams();
+      params.append('label_id', 2);
+      axios.put(update_url, params).then(
+        this.$router.go({path: this.$router.currentRoute.path, force: true})
+      )
+    },
+    update3: function() {
+      const update_url = 'http://localhost:3000/posts/' + this.$route.params.id
+      axios.defaults.headers.common['Content-Type'] = 'application/json';
+      var params = new URLSearchParams();
+      params.append('label_id', 3);
+      axios.put(update_url, params).then(
+        this.$router.go({path: this.$router.currentRoute.path, force: true})
+      )
+    },
     participate: function() {
       const participate_url = 'http://localhost:3000/participate'
       axios.defaults.headers.common['Content-Type'] = 'application/json';
@@ -193,7 +262,8 @@ export default {
       }
     })
       .then(response => {
-        this.comments = response.data
+        this.comments = response.data[0].comments
+        this.users = response.data[0].users
       })
 
     // 自分が参加しているかの取得
@@ -239,3 +309,38 @@ export default {
   }
 }
 </script>
+<style>
+.my-parts {
+  display: inline-block;
+  width: 300px;
+  max-width: 100%;
+  background: #FFCC80;
+  border: 2px solid #F57C00;
+  border-radius: 0px;
+  padding: .8em;
+  position: relative;
+  text-align: left;
+}
+.my-parts > :last-child {
+  margin-bottom: 0;
+}
+.my-parts::before,
+.my-parts::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+}
+.my-parts::before {
+  margin-top: -12.82px;
+  border: 12.82px solid transparent;
+  border-right: 12.82px solid #F57C00;
+  z-index: 1;
+}
+.my-parts::after {
+  margin-top: -10px;
+  border: 10px solid transparent;
+  border-right: 10px solid #FFCC80;
+  z-index: 2;
+}
+</style>

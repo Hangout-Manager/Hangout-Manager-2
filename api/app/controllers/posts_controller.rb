@@ -7,6 +7,21 @@ class PostsController < ApplicationController
     render json: @posts
   end
 
+  def index_label_1
+    @posts_1 = Post.where(label_id:1)
+    render json: @posts_1
+  end
+  
+  def index_label_2
+    @posts_2 = Post.where(label_id:2)
+    render json: @posts_2
+  end
+
+  def index_label_3
+    @posts_3 = Post.where(label_id:3)
+    render json: @posts_3
+  end
+
   # GET /posts/1
   def show
     @paricipation = Participation.new
