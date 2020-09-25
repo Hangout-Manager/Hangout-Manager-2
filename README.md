@@ -28,3 +28,5 @@ $ ./setup.sh
 `setup.sh`に上記のコマンドがシェルスクリプトとして書いてあります．
 
 ![スライド40](https://user-images.githubusercontent.com/33748835/94321953-07f30600-ffcc-11ea-931e-32eb5a1e76c2.JPG)
+
+[スクリーンショット](https://github.com/Hangout-Manager/Hangout-Manager-2/issues/41)
