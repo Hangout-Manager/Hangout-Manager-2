@@ -3,22 +3,22 @@ class PostsController < ApplicationController
 
   # GET /posts
   def index
-    @posts = Post.all
+    @posts = Post.all.order(start_date: "ASC").first(100)
     render json: @posts
   end
 
   def index_label_1
-    @posts_1 = Post.where(label_id:1)
+    @posts_1 = Post.where(label_id:1).order(start_date: "ASC").first(100)
     render json: @posts_1
   end
   
   def index_label_2
-    @posts_2 = Post.where(label_id:2)
+    @posts_2 = Post.where(label_id:2).order(start_date: "ASC").first(100)
     render json: @posts_2
   end
 
   def index_label_3
-    @posts_3 = Post.where(label_id:3)
+    @posts_3 = Post.where(label_id:3).order(start_date: "ASC").first(100)
     render json: @posts_3
   end
 

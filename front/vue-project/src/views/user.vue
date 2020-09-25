@@ -113,6 +113,7 @@
 
 <script>
 import axios from 'axios'
+import hangouts from '@/components/hangouts.vue'
 export default {
   data () {
     return {
@@ -125,6 +126,9 @@ export default {
       posts: [],
       participations: []
     }
+  },
+  components: {
+    hangouts
   },
   methods: {
     follow: function() {
@@ -163,12 +167,9 @@ export default {
     axios.get(current_user_url, {
       headers: { 
         "Content-Type": "application/json", 
-        // "access-token": localStorage.getItem('access-token'),
-        // "client": localStorage.getItem('client'),
-        // "uid": localStorage.getItem('uid'),
-        "access-token": this.$store.state.accessToken,
-        "client": this.$store.state.client,
-        "uid": this.$store.state.uid,
+        "access-token": localStorage.getItem('access-token'),
+        "client": localStorage.getItem('client'),
+        "uid": localStorage.getItem('uid'),
       }
     })
       .then(response => {

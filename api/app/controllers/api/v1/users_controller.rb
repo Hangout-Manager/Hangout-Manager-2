@@ -73,13 +73,13 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def current_get_post
-    @current_posts = current_api_user.posts
+    @current_posts = current_api_user.posts.order(start_date: "ASC").first(100)
     render json: { data: @current_posts }
   end
 
   def get_posts
     @user = User.find(params[:id])
-    @posts = @user.posts
+    @posts = @user.posts.order(start_date: "ASC").first(100)
     render json: @posts
   end
 

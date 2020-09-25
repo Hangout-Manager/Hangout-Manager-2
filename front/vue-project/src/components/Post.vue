@@ -149,7 +149,7 @@ export default {
       axios.defaults.headers.common['Content-Type'] = 'application/json';
       axios.post(url, params).then(
         () => {
-          this.$router.push('MyPage')
+          this.$router.push('/MyPage')
           this.show = false
           this.$router.go({path: this.$router.currentRoute.path, force: true})
     },
