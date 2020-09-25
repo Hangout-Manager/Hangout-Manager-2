@@ -28,20 +28,6 @@
     "_name": "_982ceb7c"
   },
   {
-    "name": "RegisterProfile",
-    "path": "/RegisterProfile",
-    "component": "/app/nuxt-project/pages/RegisterProfile.vue",
-    "chunkName": "pages/RegisterProfile",
-    "_name": "_7ed23c4c"
-  },
-  {
-    "name": "RegisterTrend",
-    "path": "/RegisterTrend",
-    "component": "/app/nuxt-project/pages/RegisterTrend.vue",
-    "chunkName": "pages/RegisterTrend",
-    "_name": "_29821be4"
-  },
-  {
     "name": "Timeline",
     "path": "/Timeline",
     "component": "/app/nuxt-project/pages/Timeline.vue",

@@ -39,6 +39,10 @@ Rails.application.routes.draw do
       get "get_comment/:post_id/" => "users#get_comment"
       get "get_friend_recommend/:user_id" => "users#get_friend_recommend"
       post "create_new_hangout" => "users#create_new_hangout"
+      get "current_get_participations" => "users#current_get_participations"
+      get "get_participations/:id" => "users#get_participations"
+      get "get_posts/:id" => "users#get_posts"
+      get "get_post_user/:post_id" => "users#get_post_user"
     end
   end
 

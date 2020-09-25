@@ -26,10 +26,13 @@ export default {
     }
   },
   created() {
-    const followers_url = 'http://localhost:3000/api/v1/get_followers/' + this.$route.params.user_id
+    const followers_url = 'http://localhost:3000/api/v1/current_get_followers'
     axios.get(followers_url, {
       headers: { 
         "Content-Type": "application/json", 
+        "access-token": localStorage.getItem('access-token'),
+        "client": localStorage.getItem('client'),
+        "uid": localStorage.getItem('uid'),
       }
     })
       .then(response => {

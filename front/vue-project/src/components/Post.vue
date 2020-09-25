@@ -57,13 +57,9 @@ export default {
     axios.get(show_url, {
       headers: { 
         "Content-Type": "application/json", 
-        "access-token": this.$store.state.accessToken,
-        "client": this.$store.state.client,
-        "uid": this.$store.state.uid,
-        // "Content-Type": "application/json", 
-        // "access-token": localStorage.getItem('access-token'),
-        // "client": localStorage.getItem('client'),
-        // "uid": localStorage.getItem('uid')
+        "access-token": localStorage.getItem('access-token'),
+        "client": localStorage.getItem('client'),
+        "uid": localStorage.getItem('uid')
       }
     }
     )

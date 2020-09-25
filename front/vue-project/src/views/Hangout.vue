@@ -6,54 +6,76 @@
         <v-col cols="10">
           <v-card>
             <v-row>
-              <v-col>
+              <v-col cols="1"></v-col>
+              <v-col cols="10">
                 <v-chip v-if="post.label_id==1" class="ma-2" dark color="primary">募集中</v-chip>
                 <v-chip v-if="post.label_id==2" class="ma-2" dark color="green">募集締め切り</v-chip>
                 <v-chip v-if="post.label_id==3" class="ma-2" dark color="red">終了</v-chip>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col>
-                <v-card-title>{{ post.title }}</v-card-title>
-                <v-card-title>{{ isParticipated }}</v-card-title>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col>
-                <v-card-text>参加者：</v-card-text>
-                <v-card-text v-for="user in participated_users" :key="user.id">
-                  - {{ user.name }}
-                </v-card-text>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col>
-                <v-card-text>{{ post.content }}</v-card-text>
-              </v-col>
-            </v-row>
-            <v-row v-for="comment in comments" :key="comment.id">
-              <v-col>
-                <v-card-text>{{comment.user_id}}:{{ comment.content }}</v-card-text>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col>
                 <v-chip class="ma-2" label>
                   {{ post.tag }}
                 </v-chip>
+                <v-card>
+                    <v-card-title>{{ post.title }}</v-card-title>
+                    <v-card-text>{{ post.content }}</v-card-text>
+                </v-card>
               </v-col>
+              <v-col cols="1"></v-col>
             </v-row>
             <v-row>
               <v-col cols="1"></v-col>
               <v-col cols="10">
                 <v-btn v-if="isParticipated" color="#AD1457" block dark @click="unparticipate">参加を取り消す</v-btn>
-                <v-btn v-else="isParticipated" color="#1976D2" block dark @click="participate">参加する</v-btn>
+                <v-btn v-else color="#1976D2" block dark @click="participate">参加する</v-btn>
+              </v-col>
+              <v-col cols="1"></v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="1"></v-col>
+              <v-col cols="3">
+                <v-card>
+                  <v-card-title>主催者</v-card-title>
+                  <v-row>
+                    <v-col cols="1"></v-col>
+                    <v-col>
+                      <v-btn color="black" dark block text :to="{name:'user', params:{id:post_user.id}}">{{ post_user.name }}</v-btn>
+                    </v-col>
+                    <v-col cols="1"></v-col>
+                  </v-row>
+                </v-card>
+                <v-card>
+                  <v-card-title>参加者</v-card-title>
+                  <v-row v-for="user in participated_users" :key="user.id">
+                    <v-col cols="1"></v-col>
+                    <v-col>
+                      <v-btn color="black" dark block text :to="{name:'user', params:{id:user.id}}">{{ user.name }}</v-btn>
+                    </v-col>
+                    <v-col cols="1"></v-col>
+                  </v-row>
+                </v-card>
+              </v-col>
+              <v-col cols="7">
+                <v-card>
+                  <v-card-title>コメント</v-card-title>
+                  <v-row v-for="comment in comments" :key="comment.id">
+                    <v-col cols="1"></v-col>
+                    <v-col>
+                      <v-card-text>{{ comment.content }}</v-card-text>
+                    </v-col>
+                    <v-col cols="1"></v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col cols="1"></v-col>
+                    <v-col>
+                      <v-btn color="#AD1457" dark block @click="dialog=true">コメント</v-btn>
+                    </v-col>
+                    <v-col cols="1"></v-col>
+                  </v-row>
+                </v-card>
               </v-col>
               <v-col cols="1"></v-col>
             </v-row>
             <v-row>
               <v-col>
-                <v-btn color="#AD1457" dark block @click="dialog=true">コメント</v-btn>
                 <v-row justify="center">
                   <v-dialog
                     v-model="dialog"
@@ -93,12 +115,12 @@
 
 <script>
 import axios from 'axios'
-// import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   data () {
     return {
       post: [],
+      post_user: [],
       current_user: [],
       dialog: false,
       comments: [],
@@ -114,7 +136,8 @@ export default {
       params.append('user_id', this.current_user.id);
       params.append('post_id', this.$route.params.id);
       axios.post(participate_url, params).then(
-        this.isParticipated = true
+        this.isParticipated = true,
+        this.$router.go({path: this.$router.currentRoute.path, force: true})
       )
     },
     unparticipate: function() {
@@ -124,7 +147,8 @@ export default {
       params.append('user_id', this.current_user.id);
       params.append('post_id', this.$route.params.id);
       axios.post(unparticipate_url, params).then(
-        this.isParticipated = false
+        this.isParticipated = false,
+          this.$router.push('/MyPage')
       )
     },
     comment: function() {
@@ -134,7 +158,8 @@ export default {
       params.append('content', this.content);
       params.append('post_id', this.$route.params.id);
       axios.post(comment_url, params).then(
-        this.dialog = false
+        this.dialog = false,
+        this.$router.go({path: this.$router.currentRoute.path, force: true})
       )
     },
   },
@@ -176,16 +201,26 @@ export default {
     axios.get(is_participated_url, {
       headers: { 
         "Content-Type": "application/json", 
-        "access-token": this.$store.state.accessToken,
-        "client": this.$store.state.client,
-        "uid": this.$store.state.uid,
-        // "access-token": localStorage.getItem('access-token'),
-        // "client": localStorage.getItem('client'),
-        // "uid": localStorage.getItem('uid'),
+        "access-token": localStorage.getItem('access-token'),
+        "client": localStorage.getItem('client'),
+        "uid": localStorage.getItem('uid'),
       }
     })
       .then(response => {
         this.isParticipated = response.data
+      })
+
+    const post_user_url = 'http://localhost:3000/api/v1/get_post_user/' + this.$route.params.id
+    axios.get(post_user_url, {
+      headers: { 
+        "Content-Type": "application/json", 
+        "access-token": localStorage.getItem('access-token'),
+        "client": localStorage.getItem('client'),
+        "uid": localStorage.getItem('uid'),
+      }
+    })
+      .then(response => {
+        this.post_user = response.data
       })
 
     // 現在のユーザー取得
@@ -193,12 +228,9 @@ export default {
     axios.get(current_user_url, {
       headers: { 
         "Content-Type": "application/json", 
-        "access-token": this.$store.state.accessToken,
-        "client": this.$store.state.client,
-        "uid": this.$store.state.uid,
-        // "access-token": localStorage.getItem('access-token'),
-        // "client": localStorage.getItem('client'),
-        // "uid": localStorage.getItem('uid'),
+        "access-token": localStorage.getItem('access-token'),
+        "client": localStorage.getItem('client'),
+        "uid": localStorage.getItem('uid'),
       }
     })
       .then(response => {

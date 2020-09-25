@@ -86,7 +86,7 @@
 
 <script>
 import axios from 'axios'
-import hangouts from '@/components/hangouts.vue'
+import hangouts from '../components/hangouts.vue'
 
 export default {
   data () {

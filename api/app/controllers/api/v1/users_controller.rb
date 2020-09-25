@@ -77,6 +77,32 @@ class Api::V1::UsersController < ApplicationController
     render json: { data: @current_posts }
   end
 
+  def get_posts
+    @user = User.find(params[:id])
+    @posts = @user.posts
+    render json: @posts
+  end
+
+  def current_get_participations
+    @current_participations = current_api_user.participations
+    @p_list = []
+    for p in @current_participations
+      @p_list << p.post
+      p (@p_list)
+    end
+    render json: @p_list
+  end
+
+  def get_participations
+    @user = User.find(params[:id])
+    @participations = @user.participations.all
+    @p_list = []
+    for p in @participations
+      @p_list << p.post
+    end
+    render json: @p_list
+  end
+
   def current_get_long_trend
     @current_long_trend = current_api_user.long_trend
     render json: { data: @current_long_trend }
@@ -150,6 +176,12 @@ class Api::V1::UsersController < ApplicationController
     p (@hangout.id)
     Risk.create(hangout_id:@hangout.id, value:@new_hangout["risk"])
     p (@hangout.risk)
+  end
+
+  def get_post_user
+    @post = Post.find(params[:post_id])
+    @post_user = @post.user
+    render json: @post_user
   end
 
  private
