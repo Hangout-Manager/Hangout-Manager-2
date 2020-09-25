@@ -56,12 +56,19 @@
               <v-col cols="7">
                 <v-card>
                   <v-card-title>コメント</v-card-title>
-                  <v-row v-for="comment in comments" :key="comment.id">
+                  <v-row v-for="(comment, i) in comments" :key="i">
                     <v-col cols="1"></v-col>
-                    <v-col>
-                      <v-card-text>{{ comment.content }}</v-card-text>
+                    <v-col cols="2">
+                      <v-btn color="black" dark block text :to="{name:'user', params:{id:users[i].id}}">{{ users[i].name }}</v-btn>
                     </v-col>
-                    <v-col cols="1"></v-col>
+                    <v-col cols="1">
+                      <v-avatar color="indigo">
+                        <v-icon dark align-content="center">mdi-account-circle</v-icon>
+                      </v-avatar>
+                    </v-col>
+                    <v-col cols="3">
+                      <p class="my-parts">{{ comment.content }}</p>
+                    </v-col>
                   </v-row>
                   <v-row>
                     <v-col cols="1"></v-col>
@@ -124,6 +131,7 @@ export default {
       current_user: [],
       dialog: false,
       comments: [],
+      users: [],
       isParticipated: '',
       participated_users: [],
     }
@@ -193,7 +201,8 @@ export default {
       }
     })
       .then(response => {
-        this.comments = response.data
+        this.comments = response.data[0].comments
+        this.users = response.data[0].users
       })
 
     // 自分が参加しているかの取得
@@ -239,3 +248,38 @@ export default {
   }
 }
 </script>
+<style>
+.my-parts {
+  display: inline-block;
+  width: 300px;
+  max-width: 100%;
+  background: #FFCC80;
+  border: 2px solid #F57C00;
+  border-radius: 0px;
+  padding: .8em;
+  position: relative;
+  text-align: left;
+}
+.my-parts > :last-child {
+  margin-bottom: 0;
+}
+.my-parts::before,
+.my-parts::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+}
+.my-parts::before {
+  margin-top: -12.82px;
+  border: 12.82px solid transparent;
+  border-right: 12.82px solid #F57C00;
+  z-index: 1;
+}
+.my-parts::after {
+  margin-top: -10px;
+  border: 10px solid transparent;
+  border-right: 10px solid #FFCC80;
+  z-index: 2;
+}
+</style>

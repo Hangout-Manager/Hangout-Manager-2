@@ -35,7 +35,7 @@
           <v-tab-item>
             <v-card flat>
               <v-row justify="center" align-content="center">
-                <v-col cols="5" v-for="post in posts" :key="post.id">
+                <v-col cols="5" v-for="post in posts1" :key="post.id">
                   <hangouts
                     :id="post.id"
                     :label_id="post.label_id"
@@ -50,7 +50,7 @@
           <v-tab-item>
             <v-card flat>
               <v-row justify="center" align-content="center">
-                <v-col cols="5" v-for="post in posts" :key="post.id">
+                <v-col cols="5" v-for="post in posts2" :key="post.id">
                   <hangouts
                     :id="post.id"
                     :label_id="post.label_id"
@@ -65,7 +65,7 @@
           <v-tab-item>
             <v-card flat>
               <v-row justify="center" align-content="center">
-                <v-col cols="5" v-for="post in posts" :key="post.id">
+                <v-col cols="5" v-for="post in posts3" :key="post.id">
                   <hangouts
                     :id="post.id"
                     :label_id="post.label_id"
@@ -93,6 +93,9 @@ export default {
     return {
       tabs: null,
       posts: [],
+      posts1: [],
+      posts2: [],
+      posts3: [],
     }
   },
   components: {
@@ -107,6 +110,33 @@ export default {
     })
       .then(response => {
         this.posts = response.data
+      })
+    const posts1_url = 'http://localhost:3000/post_label_1'
+    axios.get(posts1_url, {
+      headers: { 
+        "Content-Type": "application/json", 
+      }
+    })
+      .then(response => {
+        this.posts1 = response.data
+      })
+    const posts2_url = 'http://localhost:3000/post_label_2'
+    axios.get(posts2_url, {
+      headers: { 
+        "Content-Type": "application/json", 
+      }
+    })
+      .then(response => {
+        this.posts2 = response.data
+      })
+    const posts3_url = 'http://localhost:3000/post_label_3'
+    axios.get(posts3_url, {
+      headers: { 
+        "Content-Type": "application/json", 
+      }
+    })
+      .then(response => {
+        this.posts3 = response.data
       })
   }
 }

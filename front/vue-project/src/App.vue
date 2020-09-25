@@ -86,7 +86,7 @@ export default {
       items: [
         { title: 'マイページ', click: '/MyPage', icon: 'mdi-account' },
         { title: 'タイムライン', click: '/Timeline', icon: 'mdi-flag' },
-        { title: 'あそびを追加する', click: '/AddHangout', icon: 'mdi-flag' },
+        { title: 'あそびを追加する', click: '/AddHangout', icon: 'mdi-earth-plus' },
       ],
       item: ''
     }

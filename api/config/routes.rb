@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   get "hangouts10" => "hangouts#index10"
   post "comment/:user_id" => "comments#create"
   get "long_trends_without_me/:user_id" => "long_trends#index_without_me"
+  get "post_label_1" => "posts#index_label_1"
+  get "post_label_2" => "posts#index_label_2"
+  get "post_label_3" => "posts#index_label_3"
 
   namespace 'api' do
     namespace 'v1' do
