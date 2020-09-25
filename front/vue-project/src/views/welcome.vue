@@ -25,22 +25,23 @@
                 <v-card-text>
                   <v-text-field outlined label="メールアドレス" v-model="email" required></v-text-field>
                   <v-text-field outlined label="パスワード" v-model="password" type="password" required></v-text-field>
-                  <v-btn color="#1976D2" dark @click="signIn">ログイン</v-btn>
+                  <v-row>
+                    <v-col cols="12">
+                      <v-btn color="#1976D2" dark block @click="signIn">ログイン</v-btn>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col cols="6">
+                      <v-btn color="#AD1457" dark block text @click="onClickSignUp">新規登録はこちらから</v-btn>
+                    </v-col>
+                    <signup ref="signup"/> 
+                    <v-col cols="6">
+                      <v-btn color="#1976D2" dark block text @click="onClickSignIn">こちらからもログインできます</v-btn>
+                    </v-col>
+                    <signin ref="signin"/> 
+                  </v-row>
                 </v-card-text>
               </v-card>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="6"></v-col>
-            <v-col cols="4">
-              <v-row>
-                <v-col>
-                  <v-btn color="#AD1457" dark block text @click="onClickSignUp">新規登録はこちらから</v-btn>
-                  <signup ref="signup"/> 
-                  <v-btn color="#1976D2" dark block text @click="onClickSignIn">こちらからもログインできます</v-btn>
-                  <signin ref="signin"/> 
-                </v-col>
-              </v-row>
             </v-col>
           </v-row>
         </v-card>
