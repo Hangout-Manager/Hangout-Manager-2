@@ -7,9 +7,9 @@ class HangoutsController < ApplicationController
     render json: @hangouts
   end
 
-  def index10
-    @hangouts10 = Hangout.all.sample(10)
-    render json: @hangouts10
+  def index15
+    @hangouts15 = Hangout.all.sample(15)
+    render json: @hangouts15
   end
 
   # GET /hangouts/1

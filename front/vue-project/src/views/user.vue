@@ -15,9 +15,11 @@
                     <v-card>
                       <v-row justify=center>
                         <v-col cols="3" justify="center">
-                          <v-avatar color="indigo" size="120">
-                            <v-icon dark size="120">mdi-account-circle</v-icon>
-                          </v-avatar>
+                          <v-img
+                            src="@/assets/noImage.jpg"
+                            class="padleft"
+                            >
+                          </v-img>
                         </v-col>
                         <v-col cols="9">
                           <v-list>
