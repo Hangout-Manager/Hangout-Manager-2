@@ -1,11 +1,8 @@
 # Hangout-Manager-2
 
-![logo_hangout](C:\Users\masashi\workspace\3_PRIVATE\hangout\logo_hangout.png)
+![logo_hangout](https://user-images.githubusercontent.com/33748835/94321877-d9752b00-ffcb-11ea-9842-9eb25b74b4f3.png)
 
-
-
-![スライド40](C:\Users\masashi\OneDrive\デスクトップ\技育展v2\スライド40.JPG)
-
+![スライド40](https://user-images.githubusercontent.com/33748835/94321953-07f30600-ffcc-11ea-931e-32eb5a1e76c2.JPG)
 
 
 # セットアップ
