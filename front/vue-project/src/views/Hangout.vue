@@ -15,8 +15,14 @@
                   {{ post.tag }}
                 </v-chip>
                 <v-card>
-                    <v-card-title>{{ post.title }}</v-card-title>
-                    <v-card-text>{{ post.content }}</v-card-text>
+                  <br>
+                    <v-card-title style="font-size:3em">{{ post.title }}</v-card-title>
+                    <br>
+                    <v-card-text style="font-size:2em">{{ post.content }}</v-card-text>
+                    <br>
+                    <v-card-text style="font-size:1em">{{ post.start_date }}</v-card-text>
+                    <v-card-text style="font-size:1em">開始時間：{{ start_time }}</v-card-text>
+                    <v-card-text style="font-size:1em">想定時間：{{ post.estimate_time }}時間</v-card-text>
                 </v-card>
               </v-col>
               <v-col cols="1"></v-col>
@@ -165,6 +171,7 @@ export default {
       current_user: [],
       dialog: false,
       comments: [],
+      start_time: [],
       users: [],
       isParticipated: '',
       participated_users: [],
@@ -242,6 +249,16 @@ export default {
     })
       .then(response => {
         this.post = response.data
+      })
+    
+    const start_time_url = 'http://localhost:3000/api/v1/get_post_start_time/' + this.$route.params.id
+    axios.get(start_time_url, {
+      headers: { 
+        "Content-Type": "application/json", 
+      }
+    })
+      .then(response => {
+        this.start_time = response.data
       })
 
     // 参加者すべての取得

@@ -141,6 +141,9 @@ export default {
       params.append('content', this.content);
       params.append('label_id', "1");
       params.append('upper_number', this.upper_number);
+      params.append('start_date', this.pickerDate);
+      params.append('start_time', this.pickerTime);
+      params.append('estimate_time', this.estimate_time);
       params.append('tag', this.tag);
       params.append('user_id', this.user.id);
       axios.defaults.headers.common['Content-Type'] = 'application/json';

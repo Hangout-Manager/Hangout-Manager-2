@@ -190,6 +190,12 @@ class Api::V1::UsersController < ApplicationController
     render json: @post_user
   end
 
+  def get_post_start_time
+    @post = Post.find(params[:post_id])
+    @time = @post.start_time.strftime("%H:%M")
+    render json: @time
+  end
+
  private
     def user_params
       params.permit(:user_id)
