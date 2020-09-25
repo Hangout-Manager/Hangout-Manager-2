@@ -1,34 +1,24 @@
 <template>
   <div>
     <v-row>
-      <v-col cols="1"></v-col>
-      <v-col cols="10">
+      <v-col cols="3"></v-col>
+      <v-col cols="6">
         <v-card>
           <v-card-title class="subheading font-weight-bold">フォロー</v-card-title>
-          <v-divider></v-divider>
-          <v-simple-table>
-            <thead>
-              <tr>
-                <th class="text-left"><b>名前</b></th>
-                <th class="text-left"><b>メールアドレス</b></th>
-              </tr>
-            </thead>
-            <tbody> 
-              <tr v-for="(following, i) in followings" :key="i">
-                <td class="text-left">{{ following.name }}</td>
-                <td class="text-left">{{ following.email }}</td>
-              </tr>
-            </tbody>
-          </v-simple-table>
+          <v-row>
+            <v-col cols="4" v-for="following in followings" :key="following.id">
+              <v-btn color="black" dark block text :to="{name:'user', params:{id:following.id}}">{{ following.name }}</v-btn>
+            </v-col>
+          </v-row>
         </v-card>
       </v-col>
+      <v-col cols="3"></v-col>
     </v-row>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-// import { mapGetters, mapMutations } from 'vuex'
 export default {
   data () {
     return {

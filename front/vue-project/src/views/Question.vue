@@ -98,9 +98,6 @@ export default {
         "access-token": localStorage.getItem('access-token'),
         "client": localStorage.getItem('client'),
         "uid": localStorage.getItem('uid'),
-        "access-token": this.$store.state.accessToken,
-        "client": this.$store.state.client,
-        "uid": this.$store.state.uid,
       }
     }
     )

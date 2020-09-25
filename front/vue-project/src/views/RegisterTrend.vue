@@ -69,19 +69,6 @@
               <v-card-text v-for="name in target_hangouts_name" :key="name.id">
                 ・{{ name }}
               </v-card-text>
-            <v-card-text>
-                ・アゴン:{{ target_hangouts_agon }}
-              </v-card-text>
-              <v-card-text>
-                ・アレア:{{ target_hangouts_alea }}
-              </v-card-text>
-              <v-card-text>
-                ・ミミクリ:{{ target_hangouts_mimicry }}
-              </v-card-text>
-              <v-card-text>
-                ・イリンクス:{{ target_hangouts_ilinx }}
-              </v-card-text>
-
               <v-card-actions>
                 <v-spacer></v-spacer>
 
@@ -109,7 +96,6 @@
 
 <script>
 import axios from 'axios'
-// import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   data () {
@@ -188,9 +174,6 @@ export default {
         "access-token": localStorage.getItem('access-token'),
         "client": localStorage.getItem('client'),
         "uid": localStorage.getItem('uid'),
-        "access-token": this.$store.state.accessToken,
-        "client": this.$store.state.client,
-        "uid": this.$store.state.uid,
       }
     }
     )

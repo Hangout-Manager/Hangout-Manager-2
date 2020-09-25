@@ -22,9 +22,8 @@
               label="年齢"
               min="0"
               max="120"
-              thumb-label
+              thumb-label="always"
             ></v-slider>
-            <p style="text-align:center">{{ this.age }}歳</p>
             </v-col>
             <v-col cols="4"></v-col>
           </v-row>
@@ -74,7 +73,6 @@
 
 <script>
 import axios from 'axios'
-// import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   data () {
@@ -149,12 +147,9 @@ export default {
     axios.get(show_url, {
       headers: { 
         "Content-Type": "application/json", 
-        // "access-token": localStorage.getItem('access-token'),
-        // "client": localStorage.getItem('client'),
-        // "uid": localStorage.getItem('uid'),
-        "access-token": this.$store.state.accessToken,
-        "client": this.$store.state.client,
-        "uid": this.$store.state.uid,
+        "access-token": localStorage.getItem('access-token'),
+        "client": localStorage.getItem('client'),
+        "uid": localStorage.getItem('uid'),
       }
     }
     )

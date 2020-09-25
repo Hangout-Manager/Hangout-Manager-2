@@ -7,8 +7,6 @@ const _834e8002 = () => interopDefault(import('../pages/CovidQuestion.vue' /* we
 const _af18ebda = () => interopDefault(import('../pages/EditProfile.vue' /* webpackChunkName: "pages/EditProfile" */))
 const _3f1a1c7a = () => interopDefault(import('../pages/MyPage/index.vue' /* webpackChunkName: "pages/MyPage/index" */))
 const _982ceb7c = () => interopDefault(import('../pages/Question.vue' /* webpackChunkName: "pages/Question" */))
-const _7ed23c4c = () => interopDefault(import('../pages/RegisterProfile.vue' /* webpackChunkName: "pages/RegisterProfile" */))
-const _29821be4 = () => interopDefault(import('../pages/RegisterTrend.vue' /* webpackChunkName: "pages/RegisterTrend" */))
 const _15967d1d = () => interopDefault(import('../pages/Timeline.vue' /* webpackChunkName: "pages/Timeline" */))
 const _4ea4145c = () => interopDefault(import('../pages/Users.vue' /* webpackChunkName: "pages/Users" */))
 const _1540e2e0 = () => interopDefault(import('../pages/MyPage/Followers/index.vue' /* webpackChunkName: "pages/MyPage/Followers/index" */))
@@ -53,14 +51,6 @@ export const routerOptions = {
     path: "/Question",
     component: _982ceb7c,
     name: "Question"
-  }, {
-    path: "/RegisterProfile",
-    component: _7ed23c4c,
-    name: "RegisterProfile"
-  }, {
-    path: "/RegisterTrend",
-    component: _29821be4,
-    name: "RegisterTrend"
   }, {
     path: "/Timeline",
     component: _15967d1d,

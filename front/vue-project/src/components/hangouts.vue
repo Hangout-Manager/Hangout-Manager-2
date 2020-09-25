@@ -4,7 +4,7 @@
       :elevation="hover ? 12 : 2"
       :class="{ 'on-hover': hover }"
       :to="{
-             name:'Hangouts-id',
+             name:'Hangout',
              params:{
              id:id
              }

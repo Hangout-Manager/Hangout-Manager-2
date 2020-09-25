@@ -6,8 +6,8 @@
         <v-card>
           <v-card-title class="subheading font-weight-bold">フォロー</v-card-title>
           <v-row>
-            <v-col cols="4" v-for="follower in followers" :key="follower.id">
-              <v-btn color="black" dark block text :to="{name:'user', params:{id:follower.id}}">{{ follower.name }}</v-btn>
+            <v-col cols="4" v-for="following in followings" :key="following.id">
+              <v-btn color="black" dark block text :to="{name:'user', params:{id:following.id}}">{{ following.name }}</v-btn>
             </v-col>
           </v-row>
         </v-card>
@@ -22,18 +22,21 @@ import axios from 'axios'
 export default {
   data () {
     return {
-      followers: [],
+      followings: [],
     }
   },
   created() {
-    const followers_url = 'http://localhost:3000/api/v1/get_followers/' + this.$route.params.user_id
-    axios.get(followers_url, {
+    const following_url = 'http://localhost:3000/api/v1/current_get_followings'
+    axios.get(following_url, {
       headers: { 
         "Content-Type": "application/json", 
+        "access-token": localStorage.getItem('access-token'),
+        "client": localStorage.getItem('client'),
+        "uid": localStorage.getItem('uid'),
       }
     })
       .then(response => {
-        this.followers = response.data.data
+        this.followings = response.data.data
       })
   }
 }
