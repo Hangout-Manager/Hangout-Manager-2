@@ -15,13 +15,15 @@
                     <v-card>
                       <v-row justify=center>
                         <v-col cols="3" justify="center" align-content="center">
-                          <v-avatar color="indigo" size="120" align-content="center">
-                            <v-icon dark size="120" align-content="center">mdi-account-circle</v-icon>
-                          </v-avatar>
+                          <v-img
+                            src="@/assets/noImage.jpg"
+                            class="padleft"
+                            >
+                          </v-img>
                         </v-col>
-                        <v-col cols="9">
-                          <v-list>
-                            <v-list-item>
+                            <v-col cols="9">
+                              <v-list>
+                                <v-list-item>
                               <v-list-item-content>メールアドレス</v-list-item-content>
                               <v-list-item-content class="align-end">{{ user.email }}</v-list-item-content>
                             </v-list-item>
@@ -265,3 +267,8 @@ export default {
   }
 }
 </script>
+<style>
+.padleft {
+  margin-left: 15px;
+}
+</style>

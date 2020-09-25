@@ -28,7 +28,7 @@
               </v-row>
               <v-row>
                 <v-col>
-                  <h2 style="text-align:center">であそぶのは好きですか？</h2>
+                  <h2 style="text-align:center">は好きですか？</h2>
                 </v-col>
               </v-row>
               <v-row>
@@ -128,12 +128,12 @@ export default {
     pushYes (n) {
       this.count += 1
       this.yes_list += (n-1)
-      if (this.count == 3){
-        this.target_hangouts_name = [this.hangouts[this.yes_list[0]].name, this.hangouts[this.yes_list[1]].name, this.hangouts[this.yes_list[2]].name]
-        this.target_hangouts_agon = (this.hangouts[this.yes_list[0]].agon + this.hangouts[this.yes_list[1]].agon + this.hangouts[this.yes_list[2]].agon) / this.count
-        this.target_hangouts_alea = (this.hangouts[this.yes_list[0]].alea + this.hangouts[this.yes_list[1]].alea + this.hangouts[this.yes_list[2]].alea) / this.count
-        this.target_hangouts_mimicry = (this.hangouts[this.yes_list[0]].mimicry + this.hangouts[this.yes_list[1]].mimicry + this.hangouts[this.yes_list[2]].mimicry) / this.count
-        this.target_hangouts_ilinx = (this.hangouts[this.yes_list[0]].ilinx + this.hangouts[this.yes_list[1]].ilinx + this.hangouts[this.yes_list[2]].ilinx) / this.count
+      if (this.count == 4){
+        this.target_hangouts_name = [this.hangouts[this.yes_list[0]].name, this.hangouts[this.yes_list[1]].name, this.hangouts[this.yes_list[2]].name, this.hangouts[this.yes_list[3]].name]
+        this.target_hangouts_agon = (this.hangouts[this.yes_list[0]].agon + this.hangouts[this.yes_list[1]].agon + this.hangouts[this.yes_list[2]].agon + this.hangouts[this.yes_list[3]].agon) / this.count
+        this.target_hangouts_alea = (this.hangouts[this.yes_list[0]].alea + this.hangouts[this.yes_list[1]].alea + this.hangouts[this.yes_list[2]].alea + this.hangouts[this.yes_list[3]].alea) / this.count
+        this.target_hangouts_mimicry = (this.hangouts[this.yes_list[0]].mimicry + this.hangouts[this.yes_list[1]].mimicry + this.hangouts[this.yes_list[2]].mimicry + this.hangouts[this.yes_list[3]].mimicry) / this.count
+        this.target_hangouts_ilinx = (this.hangouts[this.yes_list[0]].ilinx + this.hangouts[this.yes_list[1]].ilinx + this.hangouts[this.yes_list[2]].ilinx + this.hangouts[this.yes_list[3]].ilinx) / this.count
         this.dialog = true
       }
     },
@@ -156,7 +156,7 @@ export default {
     }
   },
   created() {
-    const hangouts_url = 'http://localhost:3000/hangouts10'
+    const hangouts_url = 'http://localhost:3000/hangouts15'
     axios.get(hangouts_url, {
       headers: { 
         "Content-Type": "application/json", 

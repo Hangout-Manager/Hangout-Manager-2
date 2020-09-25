@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   post "unparticipate" => "participations#destroy"
   get "isfollow/:id" => "relationships#is_follow"
   get "isparticipated/:id" => "participations#is_participated"
-  get "hangouts10" => "hangouts#index10"
+  get "hangouts15" => "hangouts#index15"
   post "comment/:user_id" => "comments#create"
   get "long_trends_without_me/:user_id" => "long_trends#index_without_me"
   get "post_label_1" => "posts#index_label_1"
